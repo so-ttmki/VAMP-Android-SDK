@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">VAMPSample</string>
+    <string name="vamp_ad">Ad</string>
+    <string name="info">Info</string>
+    <string name="load">Load</string>
+    <string name="show">Show</string>
+    <string name="sound_off">SoundOff</string>
+    <string name="sound_on">SoundOn</string>
+</resources>

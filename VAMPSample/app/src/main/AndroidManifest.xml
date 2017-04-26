@@ -27,12 +27,9 @@
             android:name=".VAMPAdActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"></activity>
         <!--applovin-->
-        <!--
         <activity android:name="com.applovin.adview.AppLovinInterstitialActivity" />
         <activity android:name="com.applovin.adview.AppLovinConfirmationActivity" />
-        -->
         <!--maio-->
-        <!--
         <activity
             android:name="jp.maio.sdk.android.AdFullscreenActivity"
             android:configChanges="orientation|screenLayout|screenSize|smallestScreenSize"
@@ -47,10 +44,11 @@
                 <category android:name="android.intent.category.BROWSABLE" />
             </intent-filter>
         </activity>
-        -->
+        <!--AppVador-->
+        <activity android:name="com.appvador.ads.reward.RewardAdActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
         <!--ADGPlayer-->
-        <activity
-            android:name="com.appvador.ads.reward.RewardAdActivity"
+        <activity android:name="jp.supership.adgplayer.ADGPlayerActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
     </application>
 

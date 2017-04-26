@@ -78,6 +78,7 @@ public class InfoActivity extends AppCompatActivity {
         addKeyValue(info, "SDK_Ver(UnityAds)", getVersion("UnityAds"));
         addKeyValue(info, "SDK_Ver(AppLovin)", getVersion("AppLovin"));
         addKeyValue(info, "SDK_Ver(Maio)", getVersion("Maio"));
+        addKeyValue(info, "SDK_Ver(AppVador)", getVersion("AppVador"));
         addKeyValue(info, "SDK_Ver(ADGPlayer)", getVersion("ADGPlayer"));
         addValue(info, "--------------------");
         addKeyValue(info, "Support API Level(VAMP)", new Integer(VAMP.SupportedOSVersion()).toString());
@@ -223,9 +224,17 @@ public class InfoActivity extends AppCompatActivity {
                 } catch (Exception e) {
                 }
                 break;
-            case "ADGPlayer":
+            case "AppVador":
                 try {
                     Class<?> cls = Class.forName("com.appvador.ads.reward.RewardAdManager");
+                    Method getVersion = cls.getMethod("getVersion");
+                    version = (String) getVersion.invoke(null);
+                } catch (Exception e) {
+                }
+                break;
+            case "ADGPlayer":
+                try {
+                    Class<?> cls = Class.forName("jp.supership.adgplayer.ADGPlayer");
                     Method getVersion = cls.getMethod("getVersion");
                     version = (String) getVersion.invoke(null);
                 } catch (Exception e) {

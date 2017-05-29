@@ -15,3 +15,15 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+#AdGeneration(VAMP)
+-keepclasseswithmembers class jp.supership.vamp.** { *; }
+#ADGPlayer(RTB)
+-keep class jp.supership.adgplayer.** { *; }
+#AppLovin
+-keep class com.applovin.** { *; }
+#AppVador
+-keep class com.appvador.** { *; }
+#maio
+-keep class jp.maio.sdk.android.** { *; }
+#UnityAds
+-keep class com.unity3d.ads.android.** { *; }

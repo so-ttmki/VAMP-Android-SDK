@@ -75,11 +75,12 @@ public class InfoActivity extends AppCompatActivity {
         addKeyValue(info, "AD_ID", VAMPAdActivity.VAMP_AD_ID);
         addValue(info, "--------------------");
         addKeyValue(info, "SDK_Ver(VAMP)", getVersion("VAMP"));
-        addKeyValue(info, "SDK_Ver(UnityAds)", getVersion("UnityAds"));
-        addKeyValue(info, "SDK_Ver(AppLovin)", getVersion("AppLovin"));
-        addKeyValue(info, "SDK_Ver(Maio)", getVersion("Maio"));
-        addKeyValue(info, "SDK_Ver(AppVador)", getVersion("AppVador"));
         addKeyValue(info, "SDK_Ver(ADGPlayer)", getVersion("ADGPlayer"));
+        addKeyValue(info, "SDK_Ver(AppLovin)", getVersion("AppLovin"));
+        addKeyValue(info, "SDK_Ver(AppVador)", getVersion("AppVador"));
+        addKeyValue(info, "SDK_Ver(maio)", getVersion("maio"));
+        addKeyValue(info, "SDK_Ver(UnityAds)", getVersion("UnityAds"));
+        addKeyValue(info, "SDK_Ver(Vungle)", getVersion("Vungle"));
         addValue(info, "--------------------");
         addKeyValue(info, "Support API Level(VAMP)", new Integer(VAMP.SupportedOSVersion()).toString());
         addValue(info, "--------------------");
@@ -200,9 +201,9 @@ public class InfoActivity extends AppCompatActivity {
             case "VAMP":
                 version = VAMP.SDKVersion();
                 break;
-            case "UnityAds":
+            case "ADGPlayer":
                 try {
-                    Class<?> cls = Class.forName("com.unity3d.ads.UnityAds");
+                    Class<?> cls = Class.forName("jp.supership.adgplayer.ADGPlayer");
                     Method getVersion = cls.getMethod("getVersion");
                     version = (String) getVersion.invoke(null);
                 } catch (Exception e) {
@@ -216,14 +217,6 @@ public class InfoActivity extends AppCompatActivity {
                 } catch (Exception e) {
                 }
                 break;
-            case "Maio":
-                try {
-                    Class<?> cls = Class.forName("jp.maio.sdk.android.MaioAds");
-                    Method getSdkVersion = cls.getMethod("getSdkVersion");
-                    version = (String) getSdkVersion.invoke(null);
-                } catch (Exception e) {
-                }
-                break;
             case "AppVador":
                 try {
                     Class<?> cls = Class.forName("com.appvador.ads.reward.RewardAdManager");
@@ -232,11 +225,27 @@ public class InfoActivity extends AppCompatActivity {
                 } catch (Exception e) {
                 }
                 break;
-            case "ADGPlayer":
+            case "maio":
                 try {
-                    Class<?> cls = Class.forName("jp.supership.adgplayer.ADGPlayer");
+                    Class<?> cls = Class.forName("jp.maio.sdk.android.MaioAds");
+                    Method getSdkVersion = cls.getMethod("getSdkVersion");
+                    version = (String) getSdkVersion.invoke(null);
+                } catch (Exception e) {
+                }
+                break;
+            case "UnityAds":
+                try {
+                    Class<?> cls = Class.forName("com.unity3d.ads.UnityAds");
                     Method getVersion = cls.getMethod("getVersion");
                     version = (String) getVersion.invoke(null);
+                } catch (Exception e) {
+                }
+                break;
+            case "Vungle":
+                try {
+                    Class<?> cls = Class.forName("com.vungle.publisher.VunglePub");
+                    Field field = cls.getField("VERSION");
+                    version = (String) field.get(null);
                 } catch (Exception e) {
                 }
                 break;

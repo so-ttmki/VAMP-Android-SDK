@@ -27,3 +27,32 @@
 -keep class jp.maio.sdk.android.** { *; }
 #UnityAds
 -keep class com.unity3d.ads.android.** { *; }
+#Vungle
+-keep class jp.supership.vamp.extra.** { *; }
+-dontwarn com.vungle.**
+-dontnote com.vungle.**
+-keep class com.vungle.** { *; }
+-keep class javax.inject.*
+# GreenRobot(Vungle)
+-dontwarn de.greenrobot.event.util.**
+# RxJava(Vungle)
+-dontwarn rx.internal.util.unsafe.**
+-keepclassmembers class rx.internal.util.unsafe.*ArrayQueue*Field* {
+   long producerIndex;
+   long consumerIndex;
+}
+-keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueProducerNodeRef {
+   rx.internal.util.atomic.LinkedQueueNode producerNode;
+}
+-keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueConsumerNodeRef {
+   rx.internal.util.atomic.LinkedQueueNode consumerNode;
+}
+-keep class rx.schedulers.Schedulers { public static *; }
+-keep class rx.schedulers.ImmediateScheduler { public *; }
+-keep class rx.schedulers.TestScheduler { public *; }
+-keep class rx.schedulers.Schedulers { public static ** test(); }
+# MOAT(Vungle)
+-dontwarn com.moat.**
+-keep class com.moat.** {
+   public protected private *;
+}

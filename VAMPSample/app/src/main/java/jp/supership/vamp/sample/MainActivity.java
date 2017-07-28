@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // テストモード設定（収益が発生しないテスト広告を表示する設定）
-        // ＜対象：AppLovin,Maio,UnityAds＞
+        // ＜対象：AppLovin,maio,UnityAds＞
         // リリースする際は必ずコメントアウトしてください
 //        VAMP.setTestMode(true);
 
@@ -66,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
         //    VAMPInitializeState.AUTO	接続環境によって、WEIGHTとALL設定を自動的に切り替える（Wi-Fi:ALL、キャリア回線:WEIGHT）
         //    VAMPInitializeState.WEIGHT	配信比率が高いものをひとつ初期化する
         //    VAMPInitializeState.ALL	全アドネットワークを初期化する
+        //    VAMPInitializeState.WIFIONLY	Wi-Fi接続時のみ全アドネットワークを初期化する
         // └ アドネットワークのSDKを初期化する間隔（秒数）
         //   duration:秒単位で指定する。最小4秒、最大60秒。デフォルトは10秒。（対象:AppLovin、maio、UnityAds）
 //        VAMP.initializeAdnwSDK(this, VAMPAdActivity.VAMP_AD_ID);     // デフォルト用

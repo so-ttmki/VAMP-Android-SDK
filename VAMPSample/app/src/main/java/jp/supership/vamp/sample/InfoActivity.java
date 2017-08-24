@@ -70,19 +70,21 @@ public class InfoActivity extends AppCompatActivity {
      */
     private void initInfo() {
         StringBuffer info = new StringBuffer();
+        addKeyValue(info, "サポートAPI Level", new Integer(VAMP.SupportedOSVersion()).toString());
+        addKeyValue(info, "サポート対象OS", new Boolean(VAMP.isSupportedOSVersion()).toString());
+
         // id
         addValue(info, "--------------------");
         addKeyValue(info, "AD_ID", VAMPAdActivity.VAMP_AD_ID);
         addValue(info, "--------------------");
         addKeyValue(info, "SDK_Ver(VAMP)", getVersion("VAMP"));
         addKeyValue(info, "SDK_Ver(ADGPlayer)", getVersion("ADGPlayer"));
+        addKeyValue(info, "SDK_Ver(Admob)", getVersion("Admob"));
         addKeyValue(info, "SDK_Ver(AppLovin)", getVersion("AppLovin"));
         addKeyValue(info, "SDK_Ver(AppVador)", getVersion("AppVador"));
         addKeyValue(info, "SDK_Ver(maio)", getVersion("maio"));
         addKeyValue(info, "SDK_Ver(UnityAds)", getVersion("UnityAds"));
         addKeyValue(info, "SDK_Ver(Vungle)", getVersion("Vungle"));
-        addValue(info, "--------------------");
-        addKeyValue(info, "Support API Level(VAMP)", new Integer(VAMP.SupportedOSVersion()).toString());
         addValue(info, "--------------------");
 
         // PackageManager
@@ -207,6 +209,15 @@ public class InfoActivity extends AppCompatActivity {
                     Method getVersion = cls.getMethod("getVersion");
                     version = (String) getVersion.invoke(null);
                 } catch (Exception e) {
+                }
+                break;
+            case "Admob":
+                Resources res = getResources();
+                int versionId = res.getIdentifier("google_play_services_version", "integer", getPackageName());
+                if (versionId != 0) {
+                    try {
+                        version = new Integer(getResources().getInteger(versionId)).toString();
+                    } catch (Exception e) {}
                 }
                 break;
             case "AppLovin":

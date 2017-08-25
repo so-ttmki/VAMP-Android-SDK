@@ -21,8 +21,6 @@
 -keep class jp.supership.adgplayer.** { *; }
 #AppLovin
 -keep class com.applovin.** { *; }
-#AppVador
--keep class com.appvador.** { *; }
 #maio
 -keep class jp.maio.sdk.android.** { *; }
 #UnityAds

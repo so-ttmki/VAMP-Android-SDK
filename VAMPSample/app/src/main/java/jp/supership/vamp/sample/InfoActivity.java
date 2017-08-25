@@ -81,7 +81,6 @@ public class InfoActivity extends AppCompatActivity {
         addKeyValue(info, "SDK_Ver(ADGPlayer)", getVersion("ADGPlayer"));
         addKeyValue(info, "SDK_Ver(Admob)", getVersion("Admob"));
         addKeyValue(info, "SDK_Ver(AppLovin)", getVersion("AppLovin"));
-        addKeyValue(info, "SDK_Ver(AppVador)", getVersion("AppVador"));
         addKeyValue(info, "SDK_Ver(maio)", getVersion("maio"));
         addKeyValue(info, "SDK_Ver(UnityAds)", getVersion("UnityAds"));
         addKeyValue(info, "SDK_Ver(Vungle)", getVersion("Vungle"));
@@ -225,14 +224,6 @@ public class InfoActivity extends AppCompatActivity {
                     Class<?> cls = Class.forName("com.applovin.sdk.AppLovinSdk");
                     Field field = cls.getField("VERSION");
                     version = (String) field.get(null);
-                } catch (Exception e) {
-                }
-                break;
-            case "AppVador":
-                try {
-                    Class<?> cls = Class.forName("com.appvador.ads.reward.RewardAdManager");
-                    Method getVersion = cls.getMethod("getVersion");
-                    version = (String) getVersion.invoke(null);
                 } catch (Exception e) {
                 }
                 break;

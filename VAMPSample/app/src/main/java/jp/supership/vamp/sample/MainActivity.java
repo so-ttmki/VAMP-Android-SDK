@@ -10,8 +10,10 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import jp.supership.vamp.VAMP;
+import jp.supership.vamp.VAMPGetCountryCodeListener;
 
 public class MainActivity extends AppCompatActivity {
+    private String mVersion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,8 +59,23 @@ public class MainActivity extends AppCompatActivity {
         }
         buffer.append("SDK ");
         buffer.append(VAMP.SDKVersion());
+        mVersion = buffer.toString();
+
         TextView sdk_version = (TextView) findViewById(R.id.sdk_version);
-        sdk_version.setText(buffer.toString());
+        sdk_version.setText(mVersion);
+
+        // CountryCode取得
+        VAMP.getCountryCode(this, new VAMPGetCountryCodeListener() {
+            @Override
+            public void onCountryCode(String isoCode) {
+                StringBuffer buffer = new StringBuffer(mVersion);
+                buffer.append(" / ");
+                buffer.append(isoCode);
+
+                TextView sdk_version = (TextView) findViewById(R.id.sdk_version);
+                sdk_version.setText(buffer.toString());
+            }
+        });
 
         // アドネットワークSDK 初期化メディエーション
         // initializeAdnwSDKを使う場合は、初期化が終わる前にAD画面へ遷移してloadしないようご注意ください。

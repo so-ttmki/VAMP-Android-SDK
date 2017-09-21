@@ -1,6 +1,6 @@
 # Add project specific ProGuard rules here.
 # By default, the flags in this file are appended to flags specified
-# in /Users/XXXXXXXX/Library/Android/sdk/tools/proguard/proguard-android.txt
+# in ${sdk.dir}/tools/proguard/proguard-android.txt
 # You can edit the include path and order by changing the proguardFiles
 # directive in build.gradle.
 #
@@ -28,6 +28,8 @@
 -keep class jp.maio.sdk.android.** { *; }
 #UnityAds
 -keep class com.unity3d.ads.android.** { *; }
+#FAN
+-keep class com.facebook.ads.** { *; }
 #Vungle
 -keep class jp.supership.vamp.extra.** { *; }
 -dontwarn com.vungle.**

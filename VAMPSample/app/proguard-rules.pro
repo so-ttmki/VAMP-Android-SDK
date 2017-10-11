@@ -30,6 +30,9 @@
 -keep class com.unity3d.ads.android.** { *; }
 #FAN
 -keep class com.facebook.ads.** { *; }
+#nend
+-keep class net.nend.android.** { *; }
+-dontwarn net.nend.android.**
 #Vungle
 -keep class jp.supership.vamp.extra.** { *; }
 -dontwarn com.vungle.**

@@ -83,6 +83,8 @@ public class InfoActivity extends AppCompatActivity {
         addKeyValue(info, "SDK_Ver(AppLovin)", getVersion("AppLovin"));
         addKeyValue(info, "SDK_Ver(FAN)", getVersion("FAN"));
         addKeyValue(info, "SDK_Ver(maio)", getVersion("maio"));
+        addKeyValue(info, "SDK_Ver(nend)", getVersion("nend"));
+        addKeyValue(info, "SDK_Ver(Tapjoy)", getVersion("Tapjoy"));
         addKeyValue(info, "SDK_Ver(UnityAds)", getVersion("UnityAds"));
         addKeyValue(info, "SDK_Ver(Vungle)", getVersion("Vungle"));
         addValue(info, "--------------------");
@@ -241,6 +243,21 @@ public class InfoActivity extends AppCompatActivity {
                     Class<?> cls = Class.forName("jp.maio.sdk.android.MaioAds");
                     Method getSdkVersion = cls.getMethod("getSdkVersion");
                     version = (String) getSdkVersion.invoke(null);
+                } catch (Exception e) {
+                }
+                break;
+            case "nend":
+                try {
+                    Class<?> cls = Class.forName("net.nend.android.NendAdRewardedVideo");
+                    version = "不明";
+                } catch (Exception e) {
+                }
+                break;
+            case "Tapjoy":
+                try {
+                    Class<?> cls = Class.forName("com.tapjoy.Tapjoy");
+                    Method getVersion = cls.getMethod("getVersion");
+                    version = (String) getVersion.invoke(null);
                 } catch (Exception e) {
                 }
                 break;

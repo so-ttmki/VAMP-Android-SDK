@@ -54,8 +54,31 @@
 -keep class rx.schedulers.ImmediateScheduler { public *; }
 -keep class rx.schedulers.TestScheduler { public *; }
 -keep class rx.schedulers.Schedulers { public static ** test(); }
-# MOAT(Vungle)
+# MOAT(Vungle、Tapjoy)
 -dontwarn com.moat.**
 -keep class com.moat.** {
    public protected private *;
 }
+# Retrofit(Vungle)
+-dontwarn okio.**
+-dontwarn retrofit2.Platform$Java8
+#Tapjoy
+-keep class com.tapjoy.** { *; }
+#-keep class com.moat.** { *; }     Vungleでも設定してるのでこっちはコメントアウト
+-keepattributes JavascriptInterface
+-keep class * extends java.util.ListResourceBundle {
+protected Object[][] getContents();
+}
+-keep public class com.google.android.gms.common.internal.safeparcel.SafeParcelable {
+public static final *** NULL;
+}
+-keepnames @com.google.android.gms.common.annotation.KeepName class *
+-keepclassmembernames class * {
+@com.google.android.gms.common.annotation.KeepName *;
+}
+-keepnames class * implements android.os.Parcelable {
+public static final ** CREATOR;
+}
+-keep class com.google.android.gms.ads.identifier.** { *; }
+-dontwarn com.tapjoy.**
+

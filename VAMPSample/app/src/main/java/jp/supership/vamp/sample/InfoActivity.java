@@ -78,7 +78,6 @@ public class InfoActivity extends AppCompatActivity {
         addKeyValue(info, "AD_ID", VAMPAdActivity.VAMP_AD_ID);
         addValue(info, "--------------------");
         addKeyValue(info, "SDK_Ver(VAMP)", getVersion("VAMP"));
-        addKeyValue(info, "SDK_Ver(ADGPlayer)", getVersion("ADGPlayer"));
         addKeyValue(info, "SDK_Ver(Admob)", getVersion("Admob"));
         addKeyValue(info, "SDK_Ver(AppLovin)", getVersion("AppLovin"));
         addKeyValue(info, "SDK_Ver(FAN)", getVersion("FAN"));
@@ -204,14 +203,6 @@ public class InfoActivity extends AppCompatActivity {
         switch (adnw) {
             case "VAMP":
                 version = VAMP.SDKVersion();
-                break;
-            case "ADGPlayer":
-                try {
-                    Class<?> cls = Class.forName("jp.supership.adgplayer.ADGPlayer");
-                    Method getVersion = cls.getMethod("getVersion");
-                    version = (String) getVersion.invoke(null);
-                } catch (Exception e) {
-                }
                 break;
             case "Admob":
                 Resources res = getResources();

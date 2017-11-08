@@ -17,8 +17,6 @@
 #}
 #AdGeneration(VAMP)
 -keepclasseswithmembers class jp.supership.vamp.** { *; }
-#ADGPlayer(RTB)
--keep class jp.supership.adgplayer.** { *; }
 #AdMob
 -keep public class com.google.android.gms.ads.** { public *; }
 -keep public class com.google.ads.** { public *; }

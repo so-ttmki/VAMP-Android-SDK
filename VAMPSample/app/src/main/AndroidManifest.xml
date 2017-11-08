@@ -28,8 +28,9 @@
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"></activity>
         <!--applovin-->
         <activity android:name="com.applovin.adview.AppLovinInterstitialActivity"
-            android:configChanges="orientation|screenSize" />
-        <activity android:name="com.applovin.adview.AppLovinConfirmationActivity" />
+                  android:configChanges="orientation|screenSize" />
+        <activity android:name="com.applovin.adview.AppLovinConfirmationActivity"
+                  android:configChanges="orientation|screenSize" />
         <!--maio-->
         <activity
             android:name="jp.maio.sdk.android.AdFullscreenActivity"
@@ -45,9 +46,6 @@
                 <category android:name="android.intent.category.BROWSABLE" />
             </intent-filter>
         </activity>
-        <!--ADGPlayer-->
-        <activity android:name="jp.supership.adgplayer.ADGPlayerActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
     </application>
 
 </manifest>

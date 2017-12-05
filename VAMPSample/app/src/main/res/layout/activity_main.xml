@@ -24,6 +24,12 @@
                 android:text="@string/vamp_ad" />
 
             <Button
+                android:id="@+id/button_vamp_multi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/vamp_multi" />
+
+            <Button
                 android:id="@+id/button_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

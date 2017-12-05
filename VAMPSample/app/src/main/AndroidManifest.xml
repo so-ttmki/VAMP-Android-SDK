@@ -25,7 +25,11 @@
         <activity android:name=".InfoActivity" />
         <activity
             android:name=".VAMPAdActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"></activity>
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
+        <activity
+            android:name=".VAMPMultiAdActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
+
         <!--applovin-->
         <activity android:name="com.applovin.adview.AppLovinInterstitialActivity"
                   android:configChanges="orientation|screenSize" />

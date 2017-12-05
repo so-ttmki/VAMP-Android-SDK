@@ -38,6 +38,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // VAMP Multi AD
+        Button vamp_multi_ad = (Button) findViewById(R.id.button_vamp_multi);
+        vamp_multi_ad.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, VAMPMultiAdActivity.class));
+            }
+        });
+
         // 端末情報表示
         Button info = (Button) findViewById(R.id.button_info);
         info.setOnClickListener(new View.OnClickListener() {

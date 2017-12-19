@@ -18,8 +18,8 @@
 #AdGeneration(VAMP)
 -keepclasseswithmembers class jp.supership.vamp.** { *; }
 #AdMob
--keep public class com.google.android.gms.ads.** { public *; }
--keep public class com.google.ads.** { public *; }
+-keep class com.google.android.gms.** { *; }
+-dontwarn com.google.android.gms.**
 #AppLovin
 -keep class com.applovin.** { *; }
 #maio

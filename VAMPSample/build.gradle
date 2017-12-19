@@ -22,6 +22,9 @@ allprojects {
             name "Tapjoy's maven repo"
             url "https://tapjoy.bintray.com/maven"
         }
+        maven {
+            url "https://maven.google.com"
+        }
     }
 }
 

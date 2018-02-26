@@ -12,7 +12,11 @@ import jp.supership.vamp.VAMPError;
 import jp.supership.vamp.VAMPListener;
 
 public class VAMPAdActivity extends BaseActivity {
-    public static final String VAMP_AD_ID = "*****";    // 広告枠ID
+    /**
+     * 広告枠IDを設定してください
+     *   59756 : Androidテスト用ID (このIDのままリリースしないでください)
+     */
+    public static final String VAMP_AD_ID = "59756";
 
     private VAMP vamp;
     private Button showButton;

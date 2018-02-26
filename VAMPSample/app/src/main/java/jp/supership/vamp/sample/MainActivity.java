@@ -9,8 +9,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.GregorianCalendar;
+
 import jp.supership.vamp.VAMP;
 import jp.supership.vamp.VAMPGetCountryCodeListener;
+import jp.supership.vamp.VAMPTargeting;
 
 public class MainActivity extends AppCompatActivity {
     private String mVersion;
@@ -28,6 +31,11 @@ public class MainActivity extends AppCompatActivity {
         // デバッグモード設定（デバッグモードで実行する）
         // ＜対象：AppVador,AppLovin,UnityAds＞
         VAMP.setDebugMode(true);
+
+        // ターゲティング設定
+        VAMP.setTargeting(new VAMPTargeting()
+            .setGender(VAMPTargeting.Gender.FEMALE)
+            .setBirthday(new GregorianCalendar(1980, 2, 20).getTime()));
 
         // VAMP AD
         Button vamp_ad = (Button) findViewById(R.id.button_vamp_ad);

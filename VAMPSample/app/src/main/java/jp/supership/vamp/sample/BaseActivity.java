@@ -35,13 +35,13 @@ public abstract class BaseActivity extends AppCompatActivity {
         // メディアプレイヤー初期化
         initSound();
 
+        if (savedInstanceState == null) {
+            clearLog();  // ログ消去
+        }
         onCreateLayout(savedInstanceState);
 
         actionBar.setSubtitle(String.format("[Test:%s] [Debug:%s]", VAMP.isTestMode(), VAMP.isDebugMode()));
 
-        if (savedInstanceState == null) {
-            clearLog();  // ログ消去
-        }
     }
 
     abstract protected void onCreateLayout(Bundle savedInstanceState);

@@ -16,7 +16,6 @@ import jp.supership.vamp.VAMPGetCountryCodeListener;
 import jp.supership.vamp.VAMPTargeting;
 
 public class MainActivity extends AppCompatActivity {
-    private String mVersion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,34 +29,44 @@ public class MainActivity extends AppCompatActivity {
 
         // デバッグモード設定（デバッグモードで実行する）
         // ＜対象：AppVador,AppLovin,UnityAds＞
+        // リリースする際は必ずコメントアウトしてください
         VAMP.setDebugMode(true);
 
-        // ターゲティング設定
-        VAMP.setTargeting(new VAMPTargeting()
-            .setGender(VAMPTargeting.Gender.FEMALE)
-            .setBirthday(new GregorianCalendar(1980, 2, 20).getTime()));
+        // ターゲティング設定（AdMob、nend）
+//        VAMP.setTargeting(new VAMPTargeting()
+//            .setGender(VAMPTargeting.Gender.FEMALE)
+//            .setBirthday(new GregorianCalendar(1980, 2, 20).getTime()));
 
-        // VAMP AD
-        Button vamp_ad = (Button) findViewById(R.id.button_vamp_ad);
-        vamp_ad.setOnClickListener(new View.OnClickListener() {
+        Button ad1Button = (Button) findViewById(R.id.button_vamp_ad1);
+        ad1Button.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, VAMPAdActivity.class));
             }
         });
 
-        // VAMP Multi AD
-        Button vamp_multi_ad = (Button) findViewById(R.id.button_vamp_multi);
-        vamp_multi_ad.setOnClickListener(new View.OnClickListener() {
+        Button ad2Button = (Button) findViewById(R.id.button_vamp_ad2);
+        ad2Button.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, VAMPAd2Activity.class));
+            }
+        });
+
+        Button multiAdButton = (Button) findViewById(R.id.button_vamp_multi);
+        multiAdButton.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, VAMPMultiAdActivity.class));
             }
         });
 
-        // 端末情報表示
-        Button info = (Button) findViewById(R.id.button_info);
-        info.setOnClickListener(new View.OnClickListener() {
+        Button infoButton = (Button) findViewById(R.id.button_info);
+        infoButton.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, InfoActivity.class));
@@ -76,21 +85,21 @@ public class MainActivity extends AppCompatActivity {
         }
         buffer.append("SDK ");
         buffer.append(VAMP.SDKVersion());
-        mVersion = buffer.toString();
+        final String version = buffer.toString();
 
-        TextView sdk_version = (TextView) findViewById(R.id.sdk_version);
-        sdk_version.setText(mVersion);
+        final TextView sdkVerTextView = (TextView) findViewById(R.id.sdk_version);
+        sdkVerTextView.setText(version);
 
-        // CountryCode取得
+        // 2桁の国コードを取得して、広告枠IDを切り替える
         VAMP.getCountryCode(this, new VAMPGetCountryCodeListener() {
+
             @Override
             public void onCountryCode(String isoCode) {
-                StringBuffer buffer = new StringBuffer(mVersion);
+                StringBuffer buffer = new StringBuffer(version);
                 buffer.append(" / ");
                 buffer.append(isoCode);
 
-                TextView sdk_version = (TextView) findViewById(R.id.sdk_version);
-                sdk_version.setText(buffer.toString());
+                sdkVerTextView.setText(buffer.toString());
             }
         });
 

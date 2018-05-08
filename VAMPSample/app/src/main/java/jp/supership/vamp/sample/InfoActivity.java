@@ -34,6 +34,7 @@ import java.lang.reflect.Method;
 import jp.supership.vamp.VAMP;
 
 public class InfoActivity extends AppCompatActivity {
+
     private static final String TAG = "VAMPSAMPLE";
 
     private AdInfoTask mAdInfoTask;
@@ -169,10 +170,10 @@ public class InfoActivity extends AppCompatActivity {
         boolean is_airplane_mode = false;
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
             is_airplane_mode = Settings.System.getInt(getContentResolver(),
-                    Settings.System.AIRPLANE_MODE_ON, 0) != 0 ? true : false;
+                Settings.System.AIRPLANE_MODE_ON, 0) != 0 ? true : false;
         } else {
             is_airplane_mode = Settings.Global.getInt(getContentResolver(),
-                    Settings.Global.AIRPLANE_MODE_ON, 0) != 0 ? true : false;
+                Settings.Global.AIRPLANE_MODE_ON, 0) != 0 ? true : false;
         }
         addKeyValue(info, "airplane_mode", new Boolean(is_airplane_mode).toString());
 
@@ -210,7 +211,8 @@ public class InfoActivity extends AppCompatActivity {
                 if (versionId != 0) {
                     try {
                         version = new Integer(getResources().getInteger(versionId)).toString();
-                    } catch (Exception e) {}
+                    } catch (Exception e) {
+                    }
                 }
                 break;
             case "AppLovin":
@@ -223,9 +225,8 @@ public class InfoActivity extends AppCompatActivity {
                 break;
             case "FAN":
                 try {
-                    Class<?> cls = Class.forName("com.facebook.ads.internal.AdSdkVersion");
-                    Field field = cls.getField("BUILD");
-                    version = (String) field.get(null);
+                    Class<?> cls = Class.forName("com.facebook.ads.BuildConfig");
+                    version = (String) cls.getField("VERSION_NAME").get(null);
                 } catch (Exception e) {
                 }
                 break;
@@ -239,8 +240,8 @@ public class InfoActivity extends AppCompatActivity {
                 break;
             case "nend":
                 try {
-                    Class<?> cls = Class.forName("net.nend.android.NendAdRewardedVideo");
-                    version = "不明";
+                    Class<?> cls = Class.forName("net.nend.android.BuildConfig");
+                    version = (String) cls.getField("VERSION_NAME").get(null);
                 } catch (Exception e) {
                 }
                 break;
@@ -278,6 +279,7 @@ public class InfoActivity extends AppCompatActivity {
     private void getGAID() {
         if (mAdInfoTask == null) {
             mAdInfoTask = new AdInfoTask(this, new AdInfoListener() {
+
                 @Override
                 public void AdInfoReady(String advertisingId, boolean limitAdTrackingEnabled) {
                     StringBuffer info = new StringBuffer();
@@ -313,10 +315,12 @@ public class InfoActivity extends AppCompatActivity {
     }
 
     interface AdInfoListener {
+
         void AdInfoReady(String advertisingId, boolean limitAdTrackingEnabled);
     }
 
     private class AdInfoTask extends AsyncTask<Void, Void, Boolean> {
+
         private Context mContext;
         private AdInfoListener mAdInfoListener;
         private AdvertisingIdClient.Info adInfo;

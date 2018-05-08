@@ -13,7 +13,7 @@ import jp.supership.vamp.VAMPListener;
 
 public class VAMPMultiAdActivity extends BaseActivity implements VAMPListener, AdvancedListener {
 
-    private static final String VAMP_MULTIAD_ID1 = "*****"; // 広告枠ID1を設定してください
+    private static final String VAMP_MULTIAD_ID1 = "59756"; // 広告枠ID1を設定してください
     private static final String VAMP_MULTIAD_ID2 = "*****"; // 広告枠ID2を設定してください
 
     private VAMP vamp1;
@@ -25,82 +25,66 @@ public class VAMPMultiAdActivity extends BaseActivity implements VAMPListener, A
         setTitle(R.string.vamp_multi);
 
         vamp1 = VAMP.getVampInstance(this, VAMP_MULTIAD_ID1);
-        vamp1.setVAMPListener(this);                // VAMPListenerをセット
-        vamp1.setAdvancedListner(this);             // AdvancedListnerをセット
+        vamp1.setVAMPListener(this);
+        vamp1.setAdvancedListner(this);
 
         vamp2 = VAMP.getVampInstance(this, VAMP_MULTIAD_ID2);
-        vamp2.setVAMPListener(this);                // VAMPListenerをセット
-        vamp2.setAdvancedListner(this);             // AdvancedListnerをセット
+        vamp2.setVAMPListener(this);
+        vamp2.setAdvancedListner(this);
 
-        // load button
-        Button load1 = (Button) findViewById(R.id.button_load1);
-        load1.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.button_load1).setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
-                addLog(getIndex(VAMP_MULTIAD_ID1), "click load button.");
-                if (!vamp1.isReady()) {
-                    // 再生する動画を準備する
-                    vamp1.load();
-                } else {
-                    addLog(getIndex(VAMP_MULTIAD_ID1), "already loaded.");
-                }
-            }
-        });
-        Button load2 = (Button) findViewById(R.id.button_load2);
-        load2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addLog(getIndex(VAMP_MULTIAD_ID2), "click load button.");
-                if (!vamp2.isReady()) {
-                    // 再生する動画を準備する
-                    vamp2.load();
-                } else {
-                    addLog(getIndex(VAMP_MULTIAD_ID2), "already loaded.");
-                }
+                // 広告の取得を開始
+                vamp1.load();
+                addLog(getIndex(VAMP_MULTIAD_ID1), "[LOAD1] load()");
             }
         });
 
-        // show button
-        Button show1 = (Button) findViewById(R.id.button_show1);
-        show1.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.button_load2).setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
-                addLog(getIndex(VAMP_MULTIAD_ID1), "click show button.");
+                // 広告の取得を開始
+                vamp2.load();
+                addLog(getIndex(VAMP_MULTIAD_ID2), "[LOAD2] load()");
+            }
+        });
+
+        findViewById(R.id.button_show1).setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // 広告の表示準備ができているか確認
                 if (vamp1.isReady()) {
-                    // 動画の準備が完了していた場合
-                    // 動画を再生する
+                    // 広告を表示
                     vamp1.show();
+                    addLog(getIndex(VAMP_MULTIAD_ID1), "[SHOW1] show()");
+                } else {
+                    addLog(getIndex(VAMP_MULTIAD_ID1), "[SHOW1] isReady:false");
                 }
             }
         });
-        Button show2 = (Button) findViewById(R.id.button_show2);
-        show2.setOnClickListener(new View.OnClickListener() {
+
+        findViewById(R.id.button_show2).setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
-                addLog(getIndex(VAMP_MULTIAD_ID2), "click show button.");
                 if (vamp2.isReady()) {
                     // 動画の準備が完了していた場合
                     // 動画を再生する
                     vamp2.show();
+                    addLog(getIndex(VAMP_MULTIAD_ID2), "[SHOW2] show()");
+                } else {
+                    addLog(getIndex(VAMP_MULTIAD_ID2), "[SHOW2] isReady:false");
                 }
             }
         });
 
-        // 設定されているid表示
-        TextView video_id1 = (TextView) findViewById(R.id.vamp_id1);
-        if (VAMP_MULTIAD_ID1.length() > 0) {
-            video_id1.setText("ID:" + VAMP_MULTIAD_ID1);
-        } else {
-            video_id1.setText("ID:設定なし");
-        }
-        TextView video_id2 = (TextView) findViewById(R.id.vamp_id2);
-        if (VAMP_MULTIAD_ID2.length() > 0) {
-            video_id2.setText("ID:" + VAMP_MULTIAD_ID2);
-        } else {
-            video_id2.setText("ID:設定なし");
-        }
+        ((TextView) findViewById(R.id.vamp_id1)).setText("ID:" + VAMP_MULTIAD_ID1);
+        ((TextView) findViewById(R.id.vamp_id2)).setText("ID:" + VAMP_MULTIAD_ID2);
 
-        // log
         mLogView = (TextView) findViewById(R.id.logs);
     }
 
@@ -125,19 +109,41 @@ public class VAMPMultiAdActivity extends BaseActivity implements VAMPListener, A
 
     @Override
     public void onReceive(String placementId, String adnwName) {
-        // 動画表示の準備完了
-        addLog(getIndex(placementId), "onReceive(" + placementId + ":" + adnwName + ")");
+        // 広告表示の準備完了
+//        addLog(getIndex(placementId), "onReceive(" + placementId + ":" + adnwName + ")");
+        // v3.0〜　onLoadResult:successで判定する
     }
 
     @Override
     public void onFail(String placementId, VAMPError error) {
-        // 動画準備or表示失敗
-        addLog(getIndex(placementId), "onFail(" + placementId + ") " + error);
+        // 広告準備or表示失敗
+        //
+        // このメソッドは廃止予定です.
+        // 代わりにonFailedToLoadおよびonFailedToShowメソッドを使用してください
+    }
+
+    @Override
+    public void onFailedToLoad(VAMPError error, String placementId) {
+        // 広告取得失敗
+        // 広告が取得できなかったときに通知されます。
+        // 例）在庫が無い、タイムアウトなど
+        // @see https://github.com/AdGeneration/VAMP-Android-SDK/wiki/VAMP-Android-API-Errors
+        addLog(getIndex(placementId), "onFailedToLoad(" + placementId + ") " + error, Color.RED);
+    }
+
+    @Override
+    public void onFailedToShow(VAMPError error, String placementId) {
+        // 広告表示失敗
+        // show実行したが、何らかの理由で広告表示が失敗したときに通知されます。
+        // 例）ユーザーが広告再生を途中でキャンセルなど
+        addLog(getIndex(placementId), "onFailedToShow(" + placementId + ") " + error, Color.RED);
     }
 
     @Override
     public void onComplete(String placementId, String adnwName) {
-        // 動画再生正常終了（インセンティブ付与可能）
+        // インセンティブ付与OK
+        // インセンティブ付与が可能になったタイミング（動画再生完了時、またはエンドカードを閉じたタイミング）で通知
+        // アドネットワークによって通知タイミングが異なる
         addLog(getIndex(placementId), "onComplete(" + placementId + ":" + adnwName + ")", Color.BLUE);
     }
 
@@ -145,26 +151,33 @@ public class VAMPMultiAdActivity extends BaseActivity implements VAMPListener, A
     public void onClose(String placementId, String adnwName) {
         // 動画プレーヤーやエンドカードが表示終了
         // ＜注意：ユーザキャンセルなども含むので、インセンティブ付与はonCompleteで判定すること＞
-        addLog(getIndex(placementId), "onClose(" + placementId + ":" + adnwName + ")", Color.MAGENTA);
+        addLog(getIndex(placementId), "onClose(" + placementId + ":" + adnwName + ")", Color.BLACK);
     }
 
     @Override
     public void onExpired(String placementId) {
         // 有効期限オーバー
         // ＜注意：onReceiveを受けてからの有効期限が切れました。showするには再度loadを行う必要が有ります＞
-        addLog(getIndex(placementId), "onExpired(" + placementId + ") ", Color.MAGENTA);
+        addLog(getIndex(placementId), "onExpired(" + placementId + ") ", Color.RED);
     }
 
     @Override
     public void onLoadStart(String placementId, String adnwName) {
-        // 優先順位順にアドネットワークごとの広告取得を開始
+        // 優先順にアドネットワークごとの広告取得を開始
         addLog(getIndex(placementId), "onLoadStart(" + placementId + ":" + adnwName + ")");
     }
 
     @Override
     public void onLoadResult(String placementId, boolean success, String adnwName, String message) {
-        // アドネットワークごとの広告取得結果
-        addLog(getIndex(placementId), "onLoadResult(" + placementId + ":" + adnwName + ") " + message);
+        // アドネットワークを１つずつ呼び出した結果、広告在庫が取得できたかをsuccessフラグで確認
+        if (success) {
+            addLog(getIndex(placementId), "onLoadResult(" + placementId + ":" + adnwName + ")", Color.BLACK);
+        } else {
+            // 失敗しても、次のアドネットワークがあれば、広告取得を試みます。
+            // 最終的に全てのアドネットワークの広告在庫が無ければ
+            // onFailedToLoadのNO_ADSTOCKが通知されます。
+            addLog(getIndex(placementId), "onLoadResult(" + placementId + ":" + adnwName + ") " + message, Color.RED);
+        }
     }
 }
 

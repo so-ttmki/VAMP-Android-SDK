@@ -18,10 +18,17 @@
             android:orientation="vertical">
 
             <Button
-                android:id="@+id/button_vamp_ad"
+                android:id="@+id/button_vamp_ad1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/vamp_ad" />
+                android:text="@string/vamp_ad1" />
+
+            <Button
+                android:id="@+id/button_vamp_ad2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/vamp_ad2" />
+
 
             <Button
                 android:id="@+id/button_vamp_multi"

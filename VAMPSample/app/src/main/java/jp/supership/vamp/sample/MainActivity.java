@@ -1,9 +1,11 @@
 package jp.supership.vamp.sample;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -13,6 +15,7 @@ import java.util.GregorianCalendar;
 
 import jp.supership.vamp.VAMP;
 import jp.supership.vamp.VAMPGetCountryCodeListener;
+import jp.supership.vamp.VAMPPrivacySettings;
 import jp.supership.vamp.VAMPTargeting;
 
 public class MainActivity extends AppCompatActivity {
@@ -102,6 +105,37 @@ public class MainActivity extends AppCompatActivity {
                 sdkVerTextView.setText(buffer.toString());
             }
         });
+
+//        VAMP.isEUAccess(new VAMPPrivacySettings.UserConsentListener() {
+//
+//            @Override
+//            public void onRequired(boolean isRequired) {
+//                if (!isRequired) {
+//                    // Nothing to do
+//                    return;
+//                }
+//
+//                new AlertDialog.Builder(MainActivity.this)
+//                    .setTitle("Personalized Ads")
+//                    .setMessage("Accept?")
+//                    .setPositiveButton("Accept", new DialogInterface.OnClickListener() {
+//
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int which) {
+//                            VAMP.setUserConsent(VAMPPrivacySettings.ConsentStatus.ACCEPTED);
+//                        }
+//                    })
+//                    .setNegativeButton("Deny", new DialogInterface.OnClickListener() {
+//
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int which) {
+//                            VAMP.setUserConsent(VAMPPrivacySettings.ConsentStatus.DENIED);
+//                        }
+//                    })
+//                    .create()
+//                    .show();
+//            }
+//        });
 
         // アドネットワークSDK 初期化メディエーション
         // initializeAdnwSDKを使う場合は、初期化が終わる前にAD画面へ遷移してloadしないようご注意ください。

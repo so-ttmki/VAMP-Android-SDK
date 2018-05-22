@@ -15,55 +15,62 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+
 #AdGeneration(VAMP)
+
 -keepclasseswithmembers class jp.supership.vamp.** { *; }
+
 #AdMob
+
 -keep class com.google.android.gms.** { *; }
 -dontwarn com.google.android.gms.**
+
 #AppLovin
+
 -keep class com.applovin.** { *; }
+
 #maio
+
 -keep class jp.maio.sdk.android.** { *; }
+
 #UnityAds
+
 -keep class com.unity3d.ads.android.** { *; }
+
 #FAN
+
 -keep class com.facebook.ads.** { *; }
+
 #nend
+
 -keep class net.nend.android.** { *; }
 -dontwarn net.nend.android.**
-#Vungle
--keep class jp.supership.vamp.extra.** { *; }
--dontwarn com.vungle.**
--dontnote com.vungle.**
--keep class com.vungle.** { *; }
--keep class javax.inject.*
-# GreenRobot(Vungle)
--dontwarn de.greenrobot.event.util.**
-# RxJava(Vungle)
--dontwarn rx.internal.util.unsafe.**
--keepclassmembers class rx.internal.util.unsafe.*ArrayQueue*Field* {
-   long producerIndex;
-   long consumerIndex;
-}
--keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueProducerNodeRef {
-   rx.internal.util.atomic.LinkedQueueNode producerNode;
-}
--keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueConsumerNodeRef {
-   rx.internal.util.atomic.LinkedQueueNode consumerNode;
-}
--keep class rx.schedulers.Schedulers { public static *; }
--keep class rx.schedulers.ImmediateScheduler { public *; }
--keep class rx.schedulers.TestScheduler { public *; }
--keep class rx.schedulers.Schedulers { public static ** test(); }
-# MOAT(Vungle、Tapjoy)
+
+# Vungle
+
+-keep class com.vungle.warren.** { *; }
+
+## Evernote
+-dontwarn com.evernote.android.job.gcm.**
+-dontwarn com.evernote.android.job.GcmAvailableHelper
+
+-dontwarn com.google.android.gms.ads.identifier.**
+
+-keep public class com.evernote.android.job.v21.PlatformJobService
+-keep public class com.evernote.android.job.v14.PlatformAlarmService
+-keep public class com.evernote.android.job.v14.PlatformAlarmReceiver
+-keep public class com.evernote.android.job.JobBootReceiver
+-keep public class com.evernote.android.job.JobRescheduleService
+
+-dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
+-keep class com.google.android.gms.internal.** { *; }
+
+## Moat SDK
+-keep class com.moat.** { *; }
 -dontwarn com.moat.**
--keep class com.moat.** {
-   public protected private *;
-}
-# Retrofit(Vungle)
--dontwarn okio.**
--dontwarn retrofit2.Platform$Java8
+
 #Tapjoy
+
 -keep class com.tapjoy.** { *; }
 #-keep class com.moat.** { *; }     Vungleでも設定してるのでこっちはコメントアウト
 -keepattributes JavascriptInterface
@@ -82,4 +89,3 @@ public static final ** CREATOR;
 }
 -keep class com.google.android.gms.ads.identifier.** { *; }
 -dontwarn com.tapjoy.**
-

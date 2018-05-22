@@ -263,8 +263,8 @@ public class InfoActivity extends AppCompatActivity {
                 break;
             case "Vungle":
                 try {
-                    Class<?> cls = Class.forName("com.vungle.publisher.VunglePub");
-                    Field field = cls.getField("VERSION");
+                    Class<?> cls = Class.forName("com.vungle.warren.BuildConfig");
+                    Field field = cls.getField("VERSION_NAME");
                     version = (String) field.get(null);
                 } catch (Exception e) {
                 }

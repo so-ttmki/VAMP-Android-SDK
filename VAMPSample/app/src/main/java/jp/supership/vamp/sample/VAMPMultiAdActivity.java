@@ -129,6 +129,19 @@ public class VAMPMultiAdActivity extends BaseActivity implements VAMPListener, A
         // 例）在庫が無い、タイムアウトなど
         // @see https://github.com/AdGeneration/VAMP-Android-SDK/wiki/VAMP-Android-API-Errors
         addLog(getIndex(placementId), "onFailedToLoad(" + placementId + ") " + error, Color.RED);
+
+        if (error == VAMPError.NO_ADSTOCK) {
+            // 在庫が無いので、再度loadをしてもらう必要があります。
+            // 連続で発生する場合、時間を置いてからloadをする必要があります。
+        } else if (error == VAMPError.NO_ADNETWORK) {
+            // アドジェネ管理画面でアドネットワークの配信がONになっていない、
+            // またはEU圏からのアクセスの場合(GDPR)発生します。
+        } else if (error == VAMPError.NEED_CONNECTION) {
+            // ネットワークに接続できない状況です。
+            // 電波状況をご確認ください。
+        } else if (error == VAMPError.MEDIATION_TIMEOUT) {
+            // アドネットワークSDKから返答が得られず、タイムアウトしました。
+        }
     }
 
     @Override
@@ -137,6 +150,10 @@ public class VAMPMultiAdActivity extends BaseActivity implements VAMPListener, A
         // show実行したが、何らかの理由で広告表示が失敗したときに通知されます。
         // 例）ユーザーが広告再生を途中でキャンセルなど
         addLog(getIndex(placementId), "onFailedToShow(" + placementId + ") " + error, Color.RED);
+
+        if (error == VAMPError.USER_CANCEL) {
+            // ユーザが広告再生を途中でキャンセルしました。
+        }
     }
 
     @Override

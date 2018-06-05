@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import jp.supership.vamp.VAMP;
@@ -26,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // テストモード設定（収益が発生しないテスト広告を表示する設定）
-        // ＜対象：AppLovin,maio,UnityAds＞
+        // ＜対象：AdMob, AppLovin, maio, nend（manifestに記載が必要）, UnityAds＞
         // リリースする際は必ずコメントアウトしてください
 //        VAMP.setTestMode(true);
 
@@ -38,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         // ターゲティング設定（AdMob、nend）
 //        VAMP.setTargeting(new VAMPTargeting()
 //            .setGender(VAMPTargeting.Gender.FEMALE)
-//            .setBirthday(new GregorianCalendar(1980, 2, 20).getTime()));
+//            .setBirthday(new GregorianCalendar(1980, Calendar.DECEMBER, 20).getTime()));
 
         Button ad1Button = (Button) findViewById(R.id.button_vamp_ad1);
         ad1Button.setOnClickListener(new View.OnClickListener() {

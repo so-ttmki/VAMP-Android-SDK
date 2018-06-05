@@ -90,6 +90,20 @@ public class VAMPAdActivity extends BaseActivity {
             // 例）在庫が無い、タイムアウトなど
             // @see https://github.com/AdGeneration/VAMP-Android-SDK/wiki/VAMP-Android-API-Errors
             addLog("onFailedToLoad(" + error + ")", Color.RED);
+
+            if (error == VAMPError.NO_ADSTOCK) {
+                // 在庫が無いので、再度loadをしてもらう必要があります。
+                // 連続で発生する場合、時間を置いてからloadをする必要があります。
+            } else if (error == VAMPError.NO_ADNETWORK) {
+                // アドジェネ管理画面でアドネットワークの配信がONになっていない、
+                // またはEU圏からのアクセスの場合(GDPR)発生します。
+            } else if (error == VAMPError.NEED_CONNECTION) {
+                // ネットワークに接続できない状況です。
+                // 電波状況をご確認ください。
+            } else if (error == VAMPError.MEDIATION_TIMEOUT) {
+                // アドネットワークSDKから返答が得られず、タイムアウトしました。
+            }
+
             showButton.setEnabled(false);
         }
 
@@ -97,16 +111,19 @@ public class VAMPAdActivity extends BaseActivity {
         public void onFailedToShow(VAMPError error, String placementId) {
             // 広告表示失敗
             // show実行したが、何らかの理由で広告表示が失敗したときに通知されます。
-            // 例）ユーザーが広告再生を途中でキャンセルなど
+            // AdMobは動画再生の途中でユーザーによるキャンセルが可能
             addLog("onFailedToShow(" + error + ")", Color.RED);
+            if (error == VAMPError.USER_CANCEL) {
+                // ユーザが広告再生を途中でキャンセルしました。
+            }
+
             showButton.setEnabled(false);
         }
 
         @Override
         public void onComplete(String placementId, String adnwName) {
-            // インセンティブ付与OK
-            // インセンティブ付与が可能になったタイミング（動画再生完了時、またはエンドカードを閉じたタイミング）で通知
-            // アドネットワークによって通知タイミングが異なる
+            // インセンティブ付与が可能になったタイミングで通知
+            // アドネットワークによって通知タイミングが異なる（動画再生完了時、またはエンドカードを閉じたタイミング）
             addLog("onComplete(" + adnwName + ")", Color.BLUE);
         }
 

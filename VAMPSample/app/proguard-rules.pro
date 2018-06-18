@@ -89,3 +89,11 @@ public static final ** CREATOR;
 }
 -keep class com.google.android.gms.ads.identifier.** { *; }
 -dontwarn com.tapjoy.**
+
+# Mintegral
+-keep class com.mobvista.** {*; }
+-keep interface com.mobvista.** {*; }
+-dontwarn com.mobvista.**
+-keep class **.R$* { public static final int mobvista*; }
+-keep class com.alphab.** {*; }
+-keep interface com.alphab.** {*; }

@@ -27,16 +27,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // テストモード設定（収益が発生しないテスト広告を表示する設定）
-        // ＜対象：AdMob, AppLovin, maio, nend（manifestに記載が必要）, UnityAds＞
+        // ＜対象：AdMob, AppLovin, maio, nend（manifestに記載が必要）, UnityAds, Mintegral＞
         // リリースする際は必ずコメントアウトしてください
-//        VAMP.setTestMode(true);
+        VAMP.setTestMode(true);
 
         // デバッグモード設定（デバッグモードで実行する）
-        // ＜対象：AppVador,AppLovin,UnityAds＞
+        // ＜対象：AppVador,AppLovin,UnityAds, Mintegral＞
         // リリースする際は必ずコメントアウトしてください
         VAMP.setDebugMode(true);
 
-        // ターゲティング設定（AdMob、nend）
+
+        // ターゲティング設定（AdMob、nend、Mintegral）
 //        VAMP.setTargeting(new VAMPTargeting()
 //            .setGender(VAMPTargeting.Gender.FEMALE)
 //            .setBirthday(new GregorianCalendar(1980, Calendar.DECEMBER, 20).getTime()));

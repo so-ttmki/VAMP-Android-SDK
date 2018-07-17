@@ -15,6 +15,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import jp.supership.vamp.VAMP;
+import jp.supership.vamp.VAMPConfiguration;
 import jp.supership.vamp.VAMPGetCountryCodeListener;
 import jp.supership.vamp.VAMPPrivacySettings;
 import jp.supership.vamp.VAMPTargeting;
@@ -27,12 +28,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // テストモード設定（収益が発生しないテスト広告を表示する設定）
-        // ＜対象：AdMob, AppLovin, maio, nend（manifestに記載が必要）, UnityAds, Mintegral＞
+        // ＜対象：AdMob, AppLovin, maio, nend（manifestに記載が必要）, UnityAds, Mintegral, MoPub＞
         // リリースする際は必ずコメントアウトしてください
         VAMP.setTestMode(true);
 
         // デバッグモード設定（デバッグモードで実行する）
-        // ＜対象：AppVador,AppLovin,UnityAds, Mintegral＞
+        // ＜対象：AppVador,AppLovin,UnityAds,Mintegral,MoPub＞
         // リリースする際は必ずコメントアウトしてください
         VAMP.setDebugMode(true);
 
@@ -41,6 +42,13 @@ public class MainActivity extends AppCompatActivity {
 //        VAMP.setTargeting(new VAMPTargeting()
 //            .setGender(VAMPTargeting.Gender.FEMALE)
 //            .setBirthday(new GregorianCalendar(1980, Calendar.DECEMBER, 20).getTime()));
+
+        VAMPConfiguration vampConfiguration = VAMPConfiguration.getInstance();
+        vampConfiguration.setPlayerCancelable(true);
+        vampConfiguration.setPlayerAlertTitleText("動画を終了しますか？");
+        vampConfiguration.setPlayerAlertBodyText("視聴途中でキャンセルすると報酬がもらえません");
+        vampConfiguration.setPlayerAlertCloseButtonText("動画を終了");
+        vampConfiguration.setPlayerAlertContinueButtonText("動画を再開");
 
         Button ad1Button = (Button) findViewById(R.id.button_vamp_ad1);
         ad1Button.setOnClickListener(new View.OnClickListener() {
@@ -57,6 +65,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, VAMPAd2Activity.class));
+            }
+        });
+
+        Button ad3Button = (Button) findViewById(R.id.button_vamp_ad3);
+        ad3Button.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, VAMPAd3Activity.class));
             }
         });
 

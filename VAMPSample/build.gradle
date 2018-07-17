@@ -23,6 +23,9 @@ allprojects {
             url "https://tapjoy.bintray.com/maven"
         }
         maven {
+            url "https://s3.amazonaws.com/moat-sdk-builds"
+        }
+        maven {
             url "https://maven.google.com"
         }
     }

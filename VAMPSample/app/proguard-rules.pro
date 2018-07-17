@@ -97,3 +97,32 @@ public static final ** CREATOR;
 -keep class **.R$* { public static final int mobvista*; }
 -keep class com.alphab.** {*; }
 -keep interface com.alphab.** {*; }
+
+# MoPub
+-keepclassmembers class com.mopub.** { public *; }
+-keep public class com.mopub.**
+-keep public class android.webkit.JavascriptInterface {}
+
+-keep class * extends com.mopub.nativeads.CustomEventRewardedAd {}
+
+-keepclassmembers class ** { @com.mopub.common.util.ReflectionTarget *; }
+-keep class com.google.android.gms.common.GooglePlayServicesUtil {*;}
+-keep class com.google.android.gms.ads.identifier.AdvertisingIdClient {*;}
+-keep class com.google.android.gms.ads.identifier.AdvertisingIdClient$Info {*;}
+
+-keep class * extends java.util.ListResourceBundle {
+    protected Object[][] getContents();
+}
+
+-keep public class com.google.android.gms.common.internal.safeparcel.SafeParcelable {
+    public static final *** NULL;
+}
+
+-keepnames @com.google.android.gms.common.annotation.KeepName class *
+-keepclassmembernames class * {
+    @com.google.android.gms.common.annotation.KeepName *;
+}
+
+-keepnames class * implements android.os.Parcelable {
+    public static final ** CREATOR;
+}

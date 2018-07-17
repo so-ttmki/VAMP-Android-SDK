@@ -32,9 +32,16 @@ dependencies {
     compile 'com.android.support:cardview-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     // FAN
-    compile 'com.facebook.android:audience-network-sdk:4.28.2'
+    compile 'com.facebook.android:audience-network-sdk:4.99.1'
     // Vungle
-    compile 'com.github.vungle:vungle-android-sdk:6.2.5'
-    compile 'com.google.android.gms:play-services-basement:15.0.0'
-    compile 'com.google.android.gms:play-services-location:15.0.0'
+    // compile 'com.github.vungle:vungle-android-sdk:6.2.5'
+    // compile 'com.google.android.gms:play-services-basement:15.0.0'
+    // compile 'com.google.android.gms:play-services-location:15.0.0'
+
+    // MoPub
+    compile('com.mopub:mopub-sdk-rewardedvideo:5.2.0@aar') {
+        transitive = true
+        exclude module: 'libAvid-mopub' // To exclude AVID
+        exclude module: 'moat-mobile-app-kit' // To exclude Moat
+    }
 }

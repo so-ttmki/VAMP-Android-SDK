@@ -32,6 +32,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import jp.supership.vamp.VAMP;
+import jp.supership.vamp.VAMPConfiguration;
 
 public class InfoActivity extends AppCompatActivity {
 
@@ -88,6 +89,10 @@ public class InfoActivity extends AppCompatActivity {
         addKeyValue(info, "SDK_Ver(UnityAds)", getVersion("UnityAds"));
         addKeyValue(info, "SDK_Ver(Vungle)", getVersion("Vungle"));
         addKeyValue(info, "SDK_Ver(Mintegral)", getVersion("Mintegral"));
+        addKeyValue(info, "SDK_Ver(MoPub)", getVersion("MoPub"));
+        addValue(info, "--------------------");
+
+        addKeyValue(info, "isPlayerCancelable", "" + VAMPConfiguration.getInstance().isPlayerCancelable());
         addValue(info, "--------------------");
 
         // PackageManager
@@ -273,6 +278,14 @@ public class InfoActivity extends AppCompatActivity {
             case "Mintegral":
                 try {
                     Class<?> cls = Class.forName("com.mobvista.msdk.out.MVConfiguration");
+                    Field field = cls.getField("SDK_VERSION");
+                    version = (String) field.get(null);
+                } catch (Exception e) {
+                }
+                break;
+            case "MoPub":
+                try {
+                    Class<?> cls = Class.forName("com.mopub.common.MoPub");
                     Field field = cls.getField("SDK_VERSION");
                     version = (String) field.get(null);
                 } catch (Exception e) {

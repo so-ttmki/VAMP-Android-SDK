@@ -24,7 +24,7 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:24.2.1'
+    compile 'com.android.support:appcompat-v7:27.1.1'
     compile 'com.google.android.gms:play-services-base:15.0.0'
     compile 'com.google.android.gms:play-services-ads:15.0.0'
 //    compile 'com.tapjoy:tapjoy-android-sdk:11.12.2@aar'
@@ -34,10 +34,10 @@ dependencies {
     // FAN
     compile 'com.facebook.android:audience-network-sdk:4.99.1'
     // Vungle
-    // compile 'com.github.vungle:vungle-android-sdk:6.2.5'
-    // compile 'com.google.android.gms:play-services-basement:15.0.0'
-    // compile 'com.google.android.gms:play-services-location:15.0.0'
-
+    compile 'com.github.vungle:vungle-android-sdk:6.3.12'
+    compile 'com.google.android.gms:play-services-basement:15.0.1'
+    compile 'com.google.android.gms:play-services-location:15.0.1'
+    compile 'com.google.android.gms:play-services-ads-identifier:15.0.1'
     // MoPub
     compile('com.mopub:mopub-sdk-rewardedvideo:5.2.0@aar') {
         transitive = true

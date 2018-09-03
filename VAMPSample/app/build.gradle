@@ -25,8 +25,8 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:27.1.1'
-    compile 'com.google.android.gms:play-services-base:15.0.0'
-    compile 'com.google.android.gms:play-services-ads:15.0.0'
+    compile 'com.google.android.gms:play-services-base:15.0.1'
+    compile 'com.google.android.gms:play-services-ads:15.0.1'
 //    compile 'com.tapjoy:tapjoy-android-sdk:11.12.2@aar'
     compile 'com.android.support:recyclerview-v7:25.3.1'
     compile 'com.android.support:cardview-v7:25.3.1'
@@ -34,7 +34,7 @@ dependencies {
     // FAN
     compile 'com.facebook.android:audience-network-sdk:4.99.1'
     // Vungle
-    compile 'com.github.vungle:vungle-android-sdk:6.3.12'
+    compile 'com.github.vungle:vungle-android-sdk:6.3.17'
     compile 'com.google.android.gms:play-services-basement:15.0.1'
     compile 'com.google.android.gms:play-services-location:15.0.1'
     compile 'com.google.android.gms:play-services-ads-identifier:15.0.1'

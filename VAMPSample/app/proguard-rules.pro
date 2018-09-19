@@ -96,10 +96,18 @@ public static final ** CREATOR;
 -dontwarn com.tapjoy.**
 
 # Mintegral
--keep class com.mobvista.** {*; }
--keep interface com.mobvista.** {*; }
--dontwarn com.mobvista.**
--keep class **.R$* { public static final int mobvista*; }
+-dontwarn com.mintegral.**
+
+-keeppackagenames com.mintegral.msdk
+
+-keep class com.mintegral.msdk.R$*{
+   *;
+}
+
+-keep class com.mintegral.msdk.**{
+   *;
+}
+
 -keep class com.alphab.** {*; }
 -keep interface com.alphab.** {*; }
 

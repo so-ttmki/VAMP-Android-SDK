@@ -277,7 +277,7 @@ public class InfoActivity extends AppCompatActivity {
                 break;
             case "Mintegral":
                 try {
-                    Class<?> cls = Class.forName("com.mobvista.msdk.out.MVConfiguration");
+                    Class<?> cls = Class.forName("com.mintegral.msdk.out.MTGConfiguration");
                     Field field = cls.getField("SDK_VERSION");
                     version = (String) field.get(null);
                 } catch (Exception e) {

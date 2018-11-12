@@ -96,18 +96,15 @@ public static final ** CREATOR;
 -dontwarn com.tapjoy.**
 
 # Mintegral
+
+#-keepattributes Signature       Vungleでも設定してるのでこっちはコメントアウト
+#-keepattributes *Annotation*    Vungleでも設定してるのでこっちはコメントアウト
+-keep class com.mintegral.msdk.**{ *; }
+-keep class com.mintegral.** {*; }
+-keep interface com.mintegral.** {*; }
+-keep class android.support.v4.** { *; }
 -dontwarn com.mintegral.**
-
--keeppackagenames com.mintegral.msdk
-
--keep class com.mintegral.msdk.R$*{
-   *;
-}
-
--keep class com.mintegral.msdk.**{
-   *;
-}
-
+-keep class **.R$* { public static final int mintegral*; }
 -keep class com.alphab.** {*; }
 -keep interface com.alphab.** {*; }
 

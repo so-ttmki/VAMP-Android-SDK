@@ -29,7 +29,8 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation 'com.google.android.gms:play-services-base:16.0.1'
     implementation 'com.google.android.gms:play-services-ads:17.1.1'
-    implementation 'com.tapjoy:tapjoy-android-sdk:12.1.0@aar'
+    // Tapjoy
+    implementation 'com.tapjoy:tapjoy-android-sdk:12.2.0@aar'
     // nend
     implementation 'net.nend.android:nend-sdk:5.0.3'
     implementation 'com.android.support:recyclerview-v7:28.0.0'

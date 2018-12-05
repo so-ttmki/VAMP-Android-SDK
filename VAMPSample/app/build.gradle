@@ -46,7 +46,7 @@ dependencies {
     // maio
     implementation 'com.maio:android-sdk:1.1.6@aar'
     // MoPub
-    implementation('com.mopub:mopub-sdk-rewardedvideo:5.4.1@aar') {
+    implementation('com.mopub:mopub-sdk-rewardedvideo:5.3.0@aar') {
         transitive = true
         exclude module: 'libAvid-mopub' // To exclude AVID
         exclude module: 'moat-mobile-app-kit' // To exclude Moat

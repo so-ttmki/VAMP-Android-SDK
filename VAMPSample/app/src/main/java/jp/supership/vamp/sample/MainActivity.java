@@ -28,12 +28,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // テストモード設定（収益が発生しないテスト広告を表示する設定）
-        // ＜対象：AdMob, AppLovin, maio, nend（manifestに記載が必要）, UnityAds, Mintegral, MoPub＞
+        // ＜対象：AdMob, AppLovin, maio, nend（manifestに記載が必要）, UnityAds, Mintegral, MoPub, FAN＞
         // リリースする際は必ずコメントアウトしてください
         VAMP.setTestMode(true);
 
         // デバッグモード設定（デバッグモードで実行する）
-        // ＜対象：AppVador,AppLovin,UnityAds,Mintegral,MoPub＞
+        // ＜対象：AppVador,AppLovin,UnityAds,Mintegral,MoPub,FAN＞
         // リリースする際は必ずコメントアウトしてください
         VAMP.setDebugMode(true);
 
@@ -122,6 +122,11 @@ public class MainActivity extends AppCompatActivity {
                 buffer.append(isoCode);
 
                 sdkVerTextView.setText(buffer.toString());
+
+//                if (isoCode.equals("US")) {
+//                    // COPPA対象ユーザである場合はtrueを設定する
+//                    VAMP.setCoppaChildDirected(true);
+//                }
             }
         });
 

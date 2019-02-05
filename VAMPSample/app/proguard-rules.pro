@@ -107,6 +107,8 @@ public static final ** CREATOR;
 -keep class **.R$* { public static final int mintegral*; }
 -keep class com.alphab.** {*; }
 -keep interface com.alphab.** {*; }
+-dontnote com.mintegral.**
+-keeppackagenames com.mintegral.msdk
 
 # MoPub
 -keepclassmembers class com.mopub.** { public *; }

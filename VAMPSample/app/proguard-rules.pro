@@ -95,21 +95,6 @@ public static final ** CREATOR;
 -keep class com.google.android.gms.ads.identifier.** { *; }
 -dontwarn com.tapjoy.**
 
-# Mintegral
-
-#-keepattributes Signature       Vungleでも設定してるのでこっちはコメントアウト
-#-keepattributes *Annotation*    Vungleでも設定してるのでこっちはコメントアウト
--keep class com.mintegral.msdk.**{ *; }
--keep class com.mintegral.** {*; }
--keep interface com.mintegral.** {*; }
--keep class android.support.v4.** { *; }
--dontwarn com.mintegral.**
--keep class **.R$* { public static final int mintegral*; }
--keep class com.alphab.** {*; }
--keep interface com.alphab.** {*; }
--dontnote com.mintegral.**
--keeppackagenames com.mintegral.msdk
-
 # MoPub
 -keepclassmembers class com.mopub.** { public *; }
 -keep public class com.mopub.**

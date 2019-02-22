@@ -29,6 +29,8 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation 'com.google.android.gms:play-services-base:16.1.0'
     implementation 'com.google.android.gms:play-services-ads:17.1.2'
+    // VAMP
+    implementation 'jp.supership.vamp:vamp-sdk:3.1.2'
     // Tapjoy
     implementation 'com.tapjoy:tapjoy-android-sdk:12.2.0@aar'
     // nend
@@ -51,7 +53,6 @@ dependencies {
         exclude module: 'libAvid-mopub' // To exclude AVID
         exclude module: 'moat-mobile-app-kit' // To exclude Moat
     }
-
     // AppLovin
     implementation 'com.applovin:applovin-sdk:9.2.1'
 }

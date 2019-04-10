@@ -116,14 +116,6 @@ public class VAMPAd3Activity extends BaseActivity {
         }
 
         @Override
-        public void onFail(String placementId, VAMPError error) {
-            // 広告準備or表示失敗
-            //
-            // deprecated このメソッドは廃止予定です.
-            // 代わりにonFailedToLoadおよびonFailedToShowメソッドを使用してください
-        }
-
-        @Override
         public void onFailedToLoad(VAMPError error, String placementId) {
             // 広告取得失敗
             // 広告が取得できなかったときに通知されます。

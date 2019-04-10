@@ -44,6 +44,11 @@
         <activity
             android:name="com.applovin.adview.AppLovinConfirmationActivity"
             android:configChanges="orientation|screenSize" />
+        <!--Mintegral-->
+        <activity
+            android:name="com.mintegral.msdk.reward.player.MTGRewardVideoActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
         <!--MoPub-->
         <activity
             android:name="com.mopub.common.MoPubBrowser"
@@ -54,6 +59,9 @@
         <activity
             android:name="com.mopub.mobileads.MraidVideoPlayerActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"/>
+
+        <!--AdMob-->
+        <!--TestID-->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-3940256099942544~3347511713"/>

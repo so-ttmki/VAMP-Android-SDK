@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         VAMP.setTestMode(true);
 
         // デバッグモード設定（デバッグモードで実行する）
-        // ＜対象：AppVador,AppLovin,UnityAds,Mintegral,MoPub,FAN＞
+        // ＜対象：AppLovin,UnityAds,Mintegral,MoPub,FAN＞
         // リリースする際は必ずコメントアウトしてください
         VAMP.setDebugMode(true);
 
@@ -125,12 +125,12 @@ public class MainActivity extends AppCompatActivity {
 
 //                if (isoCode.equals("US")) {
 //                    // COPPA対象ユーザである場合はtrueを設定する
-//                    VAMP.setCoppaChildDirected(true);
+//                    VAMP.setChildDirected(true);
 //                }
             }
         });
 
-//        VAMP.isEUAccess(new VAMPPrivacySettings.UserConsentListener() {
+//        VAMP.isEUAccess(this, new VAMPPrivacySettings.UserConsentListener() {
 //
 //            @Override
 //            public void onRequired(boolean isRequired) {

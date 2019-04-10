@@ -154,12 +154,5 @@ public class VAMPAd2Activity extends BaseActivity {
             // 広告表示の準備完了
             // v3.0〜　onLoadResult:successで判定する
         }
-
-        @Override
-        public void onFail(String placementId, VAMPError error) {
-            // 広告準備or表示失敗
-            // deprecated このメソッドは廃止予定です.
-            // 代わりにonFailedToLoadおよびonFailedToShowメソッドを使用してください
-        }
     }
 }

@@ -28,31 +28,31 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation 'com.google.android.gms:play-services-base:16.1.0'
-    implementation 'com.google.android.gms:play-services-ads:17.2.0'
+    implementation 'com.google.android.gms:play-services-ads:17.2.1'
     // VAMP
-    implementation 'jp.supership.vamp:vamp-sdk:3.1.3'
+    implementation 'jp.supership.vamp:vamp-sdk:3.1.4'
     // Tapjoy
-    implementation 'com.tapjoy:tapjoy-android-sdk:12.2.1@aar'
+    implementation 'com.tapjoy:tapjoy-android-sdk:12.3.1@aar'
     // nend
     implementation 'net.nend.android:nend-sdk:5.1.0'
     implementation 'com.android.support:recyclerview-v7:28.0.0'
     implementation 'com.android.support:support-annotations:28.0.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     // FAN
-    implementation 'com.facebook.android:audience-network-sdk:5.2.1'
+    implementation 'com.facebook.android:audience-network-sdk:5.3.1'
     // Vungle
     implementation 'com.github.vungle:vungle-android-sdk:6.3.24'
     implementation 'com.google.android.gms:play-services-basement:16.2.0'
     implementation 'com.google.android.gms:play-services-ads-identifier:16.0.0'
     implementation 'com.google.android.gms:play-services-location:16.0.0'
     // maio
-    implementation 'com.maio:android-sdk:1.1.7@aar'
+    implementation 'com.maio:android-sdk:1.1.8@aar'
     // MoPub
-    implementation('com.mopub:mopub-sdk-rewardedvideo:5.6.0@aar') {
+    implementation('com.mopub:mopub-sdk-rewardedvideo:5.7.0@aar') {
         transitive = true
         exclude module: 'libAvid-mopub' // To exclude AVID
         exclude module: 'moat-mobile-app-kit' // To exclude Moat
     }
     // AppLovin
-    implementation 'com.applovin:applovin-sdk:9.4.1'
+    implementation 'com.applovin:applovin-sdk:9.7.0'
 }

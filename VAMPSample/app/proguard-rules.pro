@@ -19,7 +19,7 @@
 #AdGeneration(VAMP)
 
 -keepclasseswithmembers class jp.supership.vamp.** { *; }
-
+-keep class jp.supership.vamp.unityadsadapter.** { *; }
 #AdMob
 
 -keep class com.google.android.gms.** { *; }

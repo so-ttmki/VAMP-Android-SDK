@@ -33,6 +33,7 @@ import java.lang.reflect.Method;
 
 import jp.supership.vamp.VAMP;
 import jp.supership.vamp.VAMPConfiguration;
+import jp.supership.vamp.VAMPPrivacySettings;
 
 public class InfoActivity extends AppCompatActivity {
 
@@ -93,6 +94,10 @@ public class InfoActivity extends AppCompatActivity {
         addValue(info, "--------------------");
 
         addKeyValue(info, "isPlayerCancelable", "" + VAMPConfiguration.getInstance().isPlayerCancelable());
+        addKeyValue(info, "ChildDirected", "" + VAMP.isChildDirected());
+        addKeyValue(info, "ConsentStatus", "" + VAMPPrivacySettings.getConsentStatus());
+        addKeyValue(info, "UnderAgeOfConsent", "" + VAMPPrivacySettings.underAgeOfConsent());
+
         addValue(info, "--------------------");
 
         // PackageManager

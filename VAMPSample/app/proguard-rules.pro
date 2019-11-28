@@ -19,7 +19,9 @@
 #AdGeneration(VAMP)
 
 -keepclasseswithmembers class jp.supership.vamp.** { *; }
+-keep class jp.supership.vamp.admobadapter.** { *; }
 -keep class jp.supership.vamp.unityadsadapter.** { *; }
+
 #AdMob
 
 -keep class com.google.android.gms.** { *; }
@@ -48,31 +50,35 @@
 
 # Vungle
 -keep class com.vungle.warren.** { *; }
+-keep class com.vungle.warren.downloader.DownloadRequest
 -dontwarn com.vungle.warren.error.VungleError$ErrorCode
+-dontwarn com.vungle.warren.downloader.DownloadRequest$Status
+
+# Google
+-keep class com.google.android.gms.internal.** { *; }
+-dontwarn com.google.android.gms.ads.identifier.**
 
 # Moat SDK
 -keep class com.moat.** { *; }
 -dontwarn com.moat.**
 
-# Okio
--dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
+# OkHttp
+-keepnames class okhttp3.internal.publicsuffix.PublicSuffixDatabase
+-dontwarn okhttp3.internal.platform.ConscryptPlatform
 
 # Retrofit
 -dontwarn okio.**
 -dontwarn retrofit2.Platform$Java8
 
-# Gson
--keepattributes Signature
--keepattributes *Annotation*
--dontwarn sun.misc.**
--keep class com.google.gson.examples.android.model.** { *; }
--keep class * implements com.google.gson.TypeAdapterFactory
--keep class * implements com.google.gson.JsonSerializer
--keep class * implements com.google.gson.JsonDeserializer
-
-# Google Android Advertising ID
--keep class com.google.android.gms.internal.** { *; }
--dontwarn com.google.android.gms.ads.identifier.**
+## Retrofit2
+-keepattributes Signature, InnerClasses, EnclosingMethod
+-keepattributes RuntimeVisibleAnnotations, RuntimeVisibleParameterAnnotations
+-keepclassmembers,allowshrinking,allowobfuscation interface * {
+    @retrofit2.http.* <methods>;
+}
+-dontwarn retrofit2.KotlinExtensions
+-if interface * { @retrofit2.http.* <methods>; }
+-keep,allowobfuscation interface <1>
 
 #Tapjoy
 

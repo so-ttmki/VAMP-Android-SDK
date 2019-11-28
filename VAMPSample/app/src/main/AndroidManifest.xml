@@ -38,13 +38,6 @@
             android:name=".VAMPMultiAdActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
 
-        <!--applovin-->
-        <activity
-            android:name="com.applovin.adview.AppLovinInterstitialActivity"
-            android:configChanges="orientation|screenSize" />
-        <activity
-            android:name="com.applovin.adview.AppLovinConfirmationActivity"
-            android:configChanges="orientation|screenSize" />
         <!--Mintegral-->
         <activity
             android:name="com.mintegral.msdk.reward.player.MTGRewardVideoActivity"

@@ -129,6 +129,13 @@ public class VAMPAd2Activity extends BaseActivity {
         }
 
         @Override
+        public void onOpen(String placementId, String adnwName) {
+            // 動画が表示したタイミングで通知
+            // アドネットワークによって通知タイミングが異なる (動画再生直前、または動画再生時)
+            addLog("onOpen(" + adnwName + ")", Color.BLACK);
+        }
+
+        @Override
         public void onComplete(String placementId, String adnwName) {
             // インセンティブ付与が可能になったタイミングで通知
             // アドネットワークによって通知タイミングが異なる（動画再生完了時、またはエンドカードを閉じたタイミング）
@@ -136,10 +143,10 @@ public class VAMPAd2Activity extends BaseActivity {
         }
 
         @Override
-        public void onClose(String placementId, String adnwName) {
+        public void onClose(String placementId, String adnwName, boolean adClicked) {
             // 動画プレーヤーやエンドカードが表示終了
             // ＜注意：ユーザキャンセルなども含むので、インセンティブ付与はonCompleteで判定すること＞
-            addLog("onClose(" + adnwName + ")", Color.BLACK);
+            addLog("onClose(" + adnwName + ", Click:" + adClicked + ")", Color.BLACK);
         }
 
         @Override

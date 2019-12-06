@@ -126,6 +126,7 @@ public class MainActivity extends AppCompatActivity {
             public void onLocation(VAMPLocation location) {
                 StringBuffer buffer = new StringBuffer(version);
                 buffer.append(" / ");
+
                 if (location != null) {
                     buffer.append(location.getCountryCode());
                     if (!TextUtils.isEmpty(location.getRegion())) {
@@ -135,23 +136,30 @@ public class MainActivity extends AppCompatActivity {
                     String countryCode = location.getCountryCode();
                     String region = location.getRegion();
 
-                    // アメリカ
-                    if ("US".equals(countryCode)) {
+                    if ("99".equals(countryCode)) {
+                        // 国コード取得失敗
+                    }
+                    else if ("US".equals(countryCode)) {
+                        // アメリカ
                         // COPPA対象ユーザである場合はtrueを設定する
 
                         // VAMP.setChildDirected(true);
-
-                        if ("CA".equals(region)) {
+                        if (TextUtils.isEmpty(location.getRegion())) {
+                            // 地域取得失敗
+                        }
+                        else if ("CA".equals(region)) {
                             // カリフォルニア州 (California)
                             // CCPA(https://www.caprivacy.org/)
                         } else if ("NV".equals(region)) {
                             // ネバタ州 (Nevada)
                         }
                     }
-
-                    // 日本
-                    if ("JP".equals(countryCode)) {
-                        if ("13".equals(region)) {
+                    else if ("JP".equals(countryCode)) {
+                        // 日本
+                        if (TextUtils.isEmpty(location.getRegion())) {
+                            // 地域取得失敗
+                        }
+                        else if ("13".equals(region)) {
                             // 東京都
                         } else if ("27".equals(region)) {
                             // 大阪府

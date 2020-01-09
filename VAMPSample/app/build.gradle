@@ -46,7 +46,7 @@ dependencies {
     implementation 'com.facebook.android:audience-network-sdk:5.6.0'
     implementation 'androidx.annotation:annotation:1.1.0'
     // Vungle
-    implementation 'com.github.vungle:vungle-android-sdk:6.4.11'
+    implementation 'com.vungle:publisher-sdk-android:6.4.11'
     implementation 'com.google.android.gms:play-services-basement:17.1.1'
     implementation 'com.google.android.gms:play-services-ads-identifier:17.0.0'
     implementation 'com.google.android.gms:play-services-location:17.0.0'

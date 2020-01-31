@@ -38,11 +38,6 @@
             android:name=".VAMPMultiAdActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
 
-        <!--Mintegral-->
-        <activity
-            android:name="com.mintegral.msdk.reward.player.MTGRewardVideoActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
         <!--MoPub-->
         <activity
             android:name="com.mopub.common.MoPubBrowser"

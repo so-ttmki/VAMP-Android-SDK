@@ -89,7 +89,6 @@ public class InfoActivity extends AppCompatActivity {
         addKeyValue(info, "SDK_Ver(Tapjoy)", getVersion("Tapjoy"));
         addKeyValue(info, "SDK_Ver(UnityAds)", getVersion("UnityAds"));
         addKeyValue(info, "SDK_Ver(Vungle)", getVersion("Vungle"));
-        addKeyValue(info, "SDK_Ver(Mintegral)", getVersion("Mintegral"));
         addKeyValue(info, "SDK_Ver(MoPub)", getVersion("MoPub"));
         addValue(info, "--------------------");
 
@@ -276,14 +275,6 @@ public class InfoActivity extends AppCompatActivity {
                 try {
                     Class<?> cls = Class.forName("com.vungle.warren.BuildConfig");
                     Field field = cls.getField("VERSION_NAME");
-                    version = (String) field.get(null);
-                } catch (Exception e) {
-                }
-                break;
-            case "Mintegral":
-                try {
-                    Class<?> cls = Class.forName("com.mintegral.msdk.out.MTGConfiguration");
-                    Field field = cls.getField("SDK_VERSION");
                     version = (String) field.get(null);
                 } catch (Exception e) {
                 }

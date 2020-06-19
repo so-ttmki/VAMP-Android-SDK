@@ -88,8 +88,6 @@ public class InfoActivity extends AppCompatActivity {
         addKeyValue(info, "SDK_Ver(nend)", getVersion("nend"));
         addKeyValue(info, "SDK_Ver(Tapjoy)", getVersion("Tapjoy"));
         addKeyValue(info, "SDK_Ver(UnityAds)", getVersion("UnityAds"));
-        addKeyValue(info, "SDK_Ver(Vungle)", getVersion("Vungle"));
-        addKeyValue(info, "SDK_Ver(MoPub)", getVersion("MoPub"));
         addValue(info, "--------------------");
 
         addKeyValue(info, "isPlayerCancelable", "" + VAMPConfiguration.getInstance().isPlayerCancelable());
@@ -268,22 +266,6 @@ public class InfoActivity extends AppCompatActivity {
                     Class<?> cls = Class.forName("com.unity3d.ads.UnityAds");
                     Method getVersion = cls.getMethod("getVersion");
                     version = (String) getVersion.invoke(null);
-                } catch (Exception e) {
-                }
-                break;
-            case "Vungle":
-                try {
-                    Class<?> cls = Class.forName("com.vungle.warren.BuildConfig");
-                    Field field = cls.getField("VERSION_NAME");
-                    version = (String) field.get(null);
-                } catch (Exception e) {
-                }
-                break;
-            case "MoPub":
-                try {
-                    Class<?> cls = Class.forName("com.mopub.common.MoPub");
-                    Field field = cls.getField("SDK_VERSION");
-                    version = (String) field.get(null);
                 } catch (Exception e) {
                 }
                 break;

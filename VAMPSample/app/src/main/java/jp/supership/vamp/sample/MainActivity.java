@@ -33,12 +33,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // テストモード設定（収益が発生しないテスト広告を表示する設定）
-        // ＜対象：AdMob, maio, nend（manifestに記載が必要）, UnityAds, MoPub, FAN＞
+        // ＜対象：AdMob, maio, nend（manifestに記載が必要）, UnityAds, FAN＞
         // リリースする際は必ずコメントアウトしてください
         VAMP.setTestMode(true);
 
         // デバッグモード設定（デバッグモードで実行する）
-        // ＜対象：AppLovin,UnityAds,MoPub,FAN＞
+        // ＜対象：AppLovin,UnityAds,FAN＞
         // リリースする際は必ずコメントアウトしてください
         VAMP.setDebugMode(true);
 

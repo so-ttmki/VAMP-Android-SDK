@@ -48,42 +48,10 @@
 -keep class net.nend.android.** { *; }
 -dontwarn net.nend.android.**
 
-# Vungle
--keep class com.vungle.warren.** { *; }
--keep class com.vungle.warren.downloader.DownloadRequest
--dontwarn com.vungle.warren.error.VungleError$ErrorCode
--dontwarn com.vungle.warren.downloader.DownloadRequest$Status
-
-# Google
--keep class com.google.android.gms.internal.** { *; }
--dontwarn com.google.android.gms.ads.identifier.**
-
-# Moat SDK
--keep class com.moat.** { *; }
--dontwarn com.moat.**
-
-# OkHttp
--keepnames class okhttp3.internal.publicsuffix.PublicSuffixDatabase
--dontwarn okhttp3.internal.platform.ConscryptPlatform
-
-# Retrofit
--dontwarn okio.**
--dontwarn retrofit2.Platform$Java8
-
-## Retrofit2
--keepattributes Signature, InnerClasses, EnclosingMethod
--keepattributes RuntimeVisibleAnnotations, RuntimeVisibleParameterAnnotations
--keepclassmembers,allowshrinking,allowobfuscation interface * {
-    @retrofit2.http.* <methods>;
-}
--dontwarn retrofit2.KotlinExtensions
--if interface * { @retrofit2.http.* <methods>; }
--keep,allowobfuscation interface <1>
-
 #Tapjoy
 
 -keep class com.tapjoy.** { *; }
-#-keep class com.moat.** { *; }     Vungleでも設定してるのでこっちはコメントアウト
+-keep class com.moat.** { *; }
 -keepattributes JavascriptInterface
 -keep class * extends java.util.ListResourceBundle {
 protected Object[][] getContents();
@@ -100,32 +68,3 @@ public static final ** CREATOR;
 }
 -keep class com.google.android.gms.ads.identifier.** { *; }
 -dontwarn com.tapjoy.**
-
-# MoPub
--keepclassmembers class com.mopub.** { public *; }
--keep public class com.mopub.**
--keep public class android.webkit.JavascriptInterface {}
-
--keep class * extends com.mopub.nativeads.CustomEventRewardedAd {}
-
--keepclassmembers class ** { @com.mopub.common.util.ReflectionTarget *; }
--keep class com.google.android.gms.common.GooglePlayServicesUtil {*;}
--keep class com.google.android.gms.ads.identifier.AdvertisingIdClient {*;}
--keep class com.google.android.gms.ads.identifier.AdvertisingIdClient$Info {*;}
-
--keep class * extends java.util.ListResourceBundle {
-    protected Object[][] getContents();
-}
-
--keep public class com.google.android.gms.common.internal.safeparcel.SafeParcelable {
-    public static final *** NULL;
-}
-
--keepnames @com.google.android.gms.common.annotation.KeepName class *
--keepclassmembernames class * {
-    @com.google.android.gms.common.annotation.KeepName *;
-}
-
--keepnames class * implements android.os.Parcelable {
-    public static final ** CREATOR;
-}

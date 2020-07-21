@@ -68,3 +68,6 @@ public static final ** CREATOR;
 }
 -keep class com.google.android.gms.ads.identifier.** { *; }
 -dontwarn com.tapjoy.**
+
+# FIVE
+-keep class com.five_corp.ad.** { *; }

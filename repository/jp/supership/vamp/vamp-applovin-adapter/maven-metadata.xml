@@ -3,10 +3,11 @@
   <groupId>jp.supership.vamp</groupId>
   <artifactId>vamp-applovin-adapter</artifactId>
   <versioning>
-    <release>9.13.4.0</release>
+    <release>9.14.6.0</release>
     <versions>
       <version>9.13.4.0</version>
+      <release>9.14.6.0</release>
     </versions>
-    <lastUpdated>20200826051049</lastUpdated>
+    <lastUpdated>20201028060750</lastUpdated>
   </versioning>
 </metadata>

@@ -22,7 +22,7 @@ allprojects {
         }
         maven {
             name "Tapjoy's maven repo"
-            url "https://tapjoy.bintray.com/maven"
+            url "https://sdk.tapjoy.com/"
         }
         maven {
             url "https://s3.amazonaws.com/moat-sdk-builds"

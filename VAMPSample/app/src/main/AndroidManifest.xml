@@ -32,9 +32,6 @@
             android:name=".VAMPAd2Activity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
         <activity
-            android:name=".VAMPAd3Activity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
-        <activity
             android:name=".VAMPMultiAdActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
 
@@ -43,8 +40,10 @@
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-3940256099942544~3347511713"/>
-
-        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
-
+        <!--Pangle-->
+        <provider
+            android:name="com.bytedance.sdk.openadsdk.multipro.TTMultiProvider"
+            android:authorities="jp.supership.vamp.sample.TTMultiProvider"
+            android:exported="false" />
     </application>
 </manifest>

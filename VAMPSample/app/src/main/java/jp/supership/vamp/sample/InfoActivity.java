@@ -1,5 +1,6 @@
 package jp.supership.vamp.sample;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -30,10 +31,9 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Locale;
 
 import jp.supership.vamp.VAMP;
-import jp.supership.vamp.VAMPConfiguration;
-import jp.supership.vamp.VAMPPrivacySettings;
 
 public class InfoActivity extends AppCompatActivity {
 
@@ -49,11 +49,12 @@ public class InfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_info);
 
         ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         setTitle(R.string.info);
 
-        mInfoTextView = (TextView) findViewById(R.id.infos);
+        mInfoTextView = findViewById(R.id.infos);
 
         initInfo();
         getGAID();
@@ -73,28 +74,22 @@ public class InfoActivity extends AppCompatActivity {
      */
     private void initInfo() {
         StringBuffer info = new StringBuffer();
-        addKeyValue(info, "サポートAPI Level", new Integer(VAMP.SupportedOSVersion()).toString());
-        addKeyValue(info, "サポート対象OS", new Boolean(VAMP.isSupportedOSVersion()).toString());
+        addKeyValue(info, "サポート対象OS", String.valueOf(VAMP.isSupported()));
 
         // id
         addValue(info, "--------------------");
         addKeyValue(info, "AD_ID", VAMPAdActivity.VAMP_AD_ID);
         addValue(info, "--------------------");
         addKeyValue(info, "SDK_Ver(VAMP)", getVersion("VAMP"));
-        addKeyValue(info, "SDK_Ver(AdMob)", getVersion("AdMob"));
+        addKeyValue(info, "SDK_Ver(Admob)", getVersion("Admob"));
         addKeyValue(info, "SDK_Ver(AppLovin)", getVersion("AppLovin"));
         addKeyValue(info, "SDK_Ver(FAN)", getVersion("FAN"));
         addKeyValue(info, "SDK_Ver(maio)", getVersion("maio"));
         addKeyValue(info, "SDK_Ver(nend)", getVersion("nend"));
         addKeyValue(info, "SDK_Ver(Tapjoy)", getVersion("Tapjoy"));
         addKeyValue(info, "SDK_Ver(UnityAds)", getVersion("UnityAds"));
-        addValue(info, "--------------------");
-
-        addKeyValue(info, "isPlayerCancelable", "" + VAMPConfiguration.getInstance().isPlayerCancelable());
-        addKeyValue(info, "ChildDirected", "" + VAMP.isChildDirected());
-        addKeyValue(info, "ConsentStatus", "" + VAMPPrivacySettings.getConsentStatus());
-        addKeyValue(info, "UnderAgeOfConsent", "" + VAMPPrivacySettings.underAgeOfConsent());
-
+        addKeyValue(info, "SDK_Ver(LINEAds)", getVersion("LINEAds"));
+        addKeyValue(info, "SDK_Ver(Pangle)", getVersion("Pangle"));
         addValue(info, "--------------------");
 
         // PackageManager
@@ -104,7 +99,7 @@ public class InfoActivity extends AppCompatActivity {
             PackageInfo p_info = pm.getPackageInfo(package_name, PackageManager.GET_ACTIVITIES);
             addKeyValue(info, "アプリ名", (String) pm.getApplicationLabel(p_info.applicationInfo));
             addKeyValue(info, "パッケージ名", package_name);
-            addKeyValue(info, "バージョンコード", new Integer(p_info.versionCode).toString());
+            addKeyValue(info, "バージョンコード", String.valueOf(p_info.versionCode));
             addKeyValue(info, "バージョン名", p_info.versionName);
         } catch (PackageManager.NameNotFoundException e) {
             Log.d(TAG, "NameNotFoundException e=" + e.getMessage());
@@ -114,7 +109,7 @@ public class InfoActivity extends AppCompatActivity {
 
         // Build
         addKeyValue(info, "Androidバージョン", Build.VERSION.RELEASE);
-        addKeyValue(info, "API Level", new Integer(Build.VERSION.SDK_INT).toString());
+        addKeyValue(info, "API Level", String.valueOf(Build.VERSION.SDK_INT));
         addKeyValue(info, "メーカー名", Build.MANUFACTURER);
         addKeyValue(info, "モデル番号", Build.MODEL);
         addKeyValue(info, "ブランド名", Build.BRAND);
@@ -126,7 +121,7 @@ public class InfoActivity extends AppCompatActivity {
         addKeyValue(info, "国コード", tm.getNetworkCountryIso());
         addKeyValue(info, "MCC+MNC", tm.getNetworkOperator());
         addKeyValue(info, "サービスプロバイダの名前", tm.getNetworkOperatorName());
-        addKeyValue(info, "NETWORKの状態", new Integer(tm.getNetworkType()).toString());
+        addKeyValue(info, "NETWORKの状態", String.valueOf(tm.getNetworkType()));
 
         addValue(info, "--------------------");
 
@@ -134,16 +129,16 @@ public class InfoActivity extends AppCompatActivity {
         Resources res = getResources();
         DisplayMetrics matrics = res.getDisplayMetrics();
         addKeyValue(info, "locale", res.getConfiguration().locale.toString());
-        addKeyValue(info, "density", new Float(matrics.density).toString());
+        addKeyValue(info, "density", String.valueOf(matrics.density));
         Integer width = null;
         Integer height = null;
         Display display = getWindowManager().getDefaultDisplay();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
             Point point = new Point();
             display.getRealSize(point);
-            width = new Integer(point.x);
-            height = new Integer(point.y);
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
+            width = point.x;
+            height = point.y;
+        } else {
             Method getRawWidth = null;
             try {
                 getRawWidth = Display.class.getMethod("getRawWidth");
@@ -161,15 +156,15 @@ public class InfoActivity extends AppCompatActivity {
         }
         addKeyValue(info, "dimensions.x", width.toString());
         addKeyValue(info, "dimensions.y", height.toString());
-        addKeyValue(info, "widthDips", new Integer((int) ((matrics.widthPixels / matrics.density) + 0.5f)).toString());
-        addKeyValue(info, "heightDips", new Integer((int) ((matrics.heightPixels / matrics.density) + 0.5f)).toString());
+        addKeyValue(info, "widthDips", String.valueOf((int) ((matrics.widthPixels / matrics.density) + 0.5f)));
+        addKeyValue(info, "heightDips", String.valueOf((int) ((matrics.heightPixels / matrics.density) + 0.5f)));
         addValue(info, "--------------------");
 
         // ConnectivityManager
         ConnectivityManager cm = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
         NetworkInfo n_info = cm.getActiveNetworkInfo();
         if (n_info != null) {
-            addKeyValue(info, n_info.getTypeName() + "[" + n_info.getState().name() + "]", n_info.isConnectedOrConnecting() == true ? "接続あり" : "接続なし");
+            addKeyValue(info, n_info.getTypeName() + "[" + n_info.getState().name() + "]", n_info.isConnectedOrConnecting() ? "接続あり" : "接続なし");
         } else {
             addKeyValue(info, "connected", "NetworkInfo取得なし");
         }
@@ -178,24 +173,24 @@ public class InfoActivity extends AppCompatActivity {
         boolean is_airplane_mode = false;
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
             is_airplane_mode = Settings.System.getInt(getContentResolver(),
-                Settings.System.AIRPLANE_MODE_ON, 0) != 0 ? true : false;
+                Settings.System.AIRPLANE_MODE_ON, 0) != 0;
         } else {
             is_airplane_mode = Settings.Global.getInt(getContentResolver(),
-                Settings.Global.AIRPLANE_MODE_ON, 0) != 0 ? true : false;
+                Settings.Global.AIRPLANE_MODE_ON, 0) != 0;
         }
-        addKeyValue(info, "airplane_mode", new Boolean(is_airplane_mode).toString());
+        addKeyValue(info, "airplane_mode", String.valueOf(is_airplane_mode));
 
         // WifiManager（※ACCESS_WIFI_STATEのpermissionが必要）
-        WifiManager wm = (WifiManager) getSystemService(WIFI_SERVICE);
+        @SuppressLint("WifiManagerLeak") WifiManager wm = (WifiManager) getSystemService(WIFI_SERVICE);
         WifiInfo w_info = wm.getConnectionInfo();
         addKeyValue(info, "Wifi SSID", w_info.getSSID());
         int ip = w_info.getIpAddress();
-        addKeyValue(info, "Wifi IP Adrress", String.format("%02d.%02d.%02d.%02d", (ip >> 0) & 0xff, (ip >> 8) & 0xff, (ip >> 16) & 0xff, (ip >> 24) & 0xff));
+        addKeyValue(info, "Wifi IP Adrress", String.format(Locale.US, "%02d.%02d.%02d.%02d", (ip >> 0) & 0xff, (ip >> 8) & 0xff, (ip >> 16) & 0xff, (ip >> 24) & 0xff));
         addKeyValue(info, "Wifi MacAddress", w_info.getMacAddress());
         int rssi = w_info.getRssi();
-        addKeyValue(info, "Wifi rssi", new Integer(rssi).toString());
+        addKeyValue(info, "Wifi rssi", String.valueOf(rssi));
         int level = WifiManager.calculateSignalLevel(rssi, 5);
-        addKeyValue(info, "Wifi level", new Integer(level).toString() + "/4");
+        addKeyValue(info, "Wifi level", String.valueOf(level) + "/4");
 
         mInfo = info.toString();
         mInfoTextView.setText(mInfo);
@@ -213,12 +208,12 @@ public class InfoActivity extends AppCompatActivity {
             case "VAMP":
                 version = VAMP.SDKVersion();
                 break;
-            case "AdMob":
+            case "Admob":
                 Resources res = getResources();
                 int versionId = res.getIdentifier("google_play_services_version", "integer", getPackageName());
                 if (versionId != 0) {
                     try {
-                        version = new Integer(getResources().getInteger(versionId)).toString();
+                        version = String.valueOf(getResources().getInteger(versionId));
                     } catch (Exception e) {
                     }
                 }
@@ -249,7 +244,7 @@ public class InfoActivity extends AppCompatActivity {
             case "nend":
                 try {
                     Class<?> cls = Class.forName("net.nend.android.BuildConfig");
-                    version = (String) cls.getField("VERSION_NAME").get(null);
+                    version = (String) cls.getField("NEND_SDK_VERSION").get(null);
                 } catch (Exception e) {
                 }
                 break;
@@ -269,7 +264,33 @@ public class InfoActivity extends AppCompatActivity {
                 } catch (Exception e) {
                 }
                 break;
-            }
+            case "LINEAds":
+                try {
+                    Class<?> cls = Class.forName("com.five_corp.ad.FiveAd");
+                    Method isInitialized = cls.getMethod("isInitialized");
+                    if ((boolean)isInitialized.invoke(cls)) {
+                        Method getSingleton = cls.getMethod("getSingleton");
+                        Object fiveAd = getSingleton.invoke(cls);
+
+                        Method getVersion = cls.getMethod("getVersion");
+                        version = String.valueOf(getVersion.invoke(fiveAd));
+                    }
+                } catch (Exception ignored) {
+                }
+                break;
+            case "Pangle":
+                try {
+                    Class<?> sdkCls = Class.forName("com.bytedance.sdk.openadsdk.TTAdSdk");
+                    Method getAdManager = sdkCls.getMethod("getAdManager");
+                    Object adManager = getAdManager.invoke(null);
+                    Class<?> adManagerCls = Class.forName("com.bytedance.sdk.openadsdk.TTAdManager");
+                    Method getSDKVersion = adManagerCls.getMethod("getSDKVersion");
+                    version = (String)getSDKVersion.invoke(adManager);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+        }
         return version;
     }
 
@@ -286,7 +307,7 @@ public class InfoActivity extends AppCompatActivity {
                     addValue(info, mInfo);
                     addValue(info, "--------------------");
                     addKeyValue(info, "GAID", advertisingId);
-                    addKeyValue(info, "isLimitAdTrackingEnabled", new Boolean(limitAdTrackingEnabled).toString());
+                    addKeyValue(info, "isLimitAdTrackingEnabled", String.valueOf(limitAdTrackingEnabled));
                     mInfoTextView.setText(info.toString());
                 }
             });
@@ -325,7 +346,7 @@ public class InfoActivity extends AppCompatActivity {
         private AdInfoListener mAdInfoListener;
         private AdvertisingIdClient.Info adInfo;
 
-        public AdInfoTask(Context context, AdInfoListener listener) {
+        AdInfoTask(Context context, AdInfoListener listener) {
             mContext = context;
             mAdInfoListener = listener;
         }

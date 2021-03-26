@@ -6,11 +6,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import jp.supership.vamp.AdvancedListener;
-import jp.supership.vamp.VAMP;
-import jp.supership.vamp.VAMPAd;
+import jp.supership.vamp.VAMPAdvancedListener;
 import jp.supership.vamp.VAMPError;
-import jp.supership.vamp.VAMPListener;
+import jp.supership.vamp.VAMPRequest;
+import jp.supership.vamp.VAMPRewardedAd;
 
 public class VAMPAdActivity extends BaseActivity {
 
@@ -20,7 +19,7 @@ public class VAMPAdActivity extends BaseActivity {
      */
     public static final String VAMP_AD_ID = "59756";
 
-    private VAMP vamp;
+    private VAMPRewardedAd rewardedAd;
     private Button showButton;
 
     @Override
@@ -28,33 +27,31 @@ public class VAMPAdActivity extends BaseActivity {
         setContentView(R.layout.activity_vamp_ad);
         setTitle(R.string.vamp_ad1);
 
-        // VAMPインスタンスの取得
-        vamp = VAMP.getVampInstance(this, VAMP_AD_ID);
-        vamp.setVAMPListener(new AdListener());
-        vamp.setAdvancedListener(new AdvListener());
+        rewardedAd = new VAMPRewardedAd(this, VAMP_AD_ID);
+        rewardedAd.setListener(new AdListener());
 
-        Button loadButton = (Button) findViewById(R.id.button_load);
+        Button loadButton = findViewById(R.id.button_load);
         loadButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 // 広告の取得を開始
-                vamp.load();
+                rewardedAd.load(new VAMPRequest.Builder().build());
                 addLog("[LOAD] load()");
             }
         });
 
-        showButton = (Button) findViewById(R.id.button_show);
+        showButton = findViewById(R.id.button_show);
         showButton.setEnabled(false);
         showButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 // 広告の表示準備ができているか確認
-                if (vamp.isReady()) {
+                if (rewardedAd.isReady()) {
                     // 動画の準備が完了していた場合
                     // 動画を再生する
-                    vamp.show();
+                    rewardedAd.show(VAMPAdActivity.this);
                     addLog("[SHOW] show()");
                 } else {
                     addLog("[SHOW] isReady:false");
@@ -62,27 +59,25 @@ public class VAMPAdActivity extends BaseActivity {
             }
         });
 
-        TextView idTextView = (TextView) findViewById(R.id.vamp_id);
-        idTextView.setText("ID:" + VAMP_AD_ID);
+        TextView idTextView = findViewById(R.id.vamp_id);
+        idTextView.setText(getString(R.string.vamp_ad_id, VAMP_AD_ID));
 
-        mLogView = (TextView) findViewById(R.id.logs);
+        mLogView = findViewById(R.id.logs);
     }
 
-    private class AdListener implements VAMPListener {
+    private class AdListener implements VAMPAdvancedListener {
 
         @Override
-        public void onReceive(VAMPAd vampAd) {
-            // 広告表示の準備完了
-            // v3.0〜　onLoadResult:successで判定する
+        public void onReceived() {
+            addLog("onReceived()");
         }
 
         @Override
-        public void onFailedToLoad(VAMPError vampError, VAMPAd vampAd) {
+        public void onFailedToLoad(VAMPError vampError) {
             // 広告取得失敗
             // 広告が取得できなかったときに通知されます。
             // 例）在庫が無い、タイムアウトなど
-            // @see https://github.com/AdGeneration/VAMP-Android-SDK/wiki/VAMP-Android-API-Errors
-            addLog("onFailedToLoad(" + vampError + ")", Color.RED);
+            addLog(String.format("onFailedToLoad(%s)", vampError), Color.RED);
 
             if (vampError == VAMPError.NO_ADSTOCK) {
                 // 在庫が無いので、再度loadをしてもらう必要があります。
@@ -101,11 +96,11 @@ public class VAMPAdActivity extends BaseActivity {
         }
 
         @Override
-        public void onFailedToShow(VAMPError vampError, VAMPAd vampAd) {
+        public void onFailedToShow(VAMPError vampError) {
             // 広告表示失敗
             // show実行したが、何らかの理由で広告表示が失敗したときに通知されます。
             // AdMobは動画再生の途中でユーザーによるキャンセルが可能
-            addLog("onFailedToShow(" + vampError + ")", Color.RED);
+            addLog(String.format("onFailedToShow(%s)", vampError), Color.RED);
             if (vampError == VAMPError.USER_CANCEL) {
                 // ユーザが広告再生を途中でキャンセルしました。
             }
@@ -114,60 +109,53 @@ public class VAMPAdActivity extends BaseActivity {
         }
 
         @Override
-        public void onOpen(VAMPAd vampAd) {
+        public void onOpened() {
             // 動画が表示したタイミングで通知
             // アドネットワークによって通知タイミングが異なる (動画再生直前、または動画再生時)
-            String adnwName = vampAd.getAdnwName();
-            addLog("onOpen(" + adnwName + ")", Color.BLACK);
+            addLog("onOpened()", Color.BLACK);
         }
 
         @Override
-        public void onComplete(VAMPAd vampAd) {
+        public void onCompleted() {
             // インセンティブ付与が可能になったタイミングで通知
             // アドネットワークによって通知タイミングが異なる（動画再生完了時、またはエンドカードを閉じたタイミング）
-            String adnwName = vampAd.getAdnwName();
-            addLog("onComplete(" + adnwName + ")", Color.BLUE);
+            addLog("onCompleted()", Color.BLUE);
         }
 
         @Override
-        public void onClose(VAMPAd vampAd, boolean adClicked) {
+        public void onClosed(boolean clicked) {
             // 動画プレーヤーやエンドカードが表示終了
             // ＜注意：ユーザキャンセルなども含むので、インセンティブ付与はonCompleteで判定すること＞
-            String adnwName = vampAd.getAdnwName();
-            addLog("onClose(" + adnwName + ", Click:" + adClicked + ")", Color.BLACK);
+            addLog(String.format("onClosed(Click:%s)", clicked), Color.BLACK);
         }
 
         @Override
-        public void onExpired(String placementId) {
+        public void onExpired() {
             // 有効期限オーバー
             // ＜注意：onReceiveを受けてからの有効期限が切れました。showするには再度loadを行う必要が有ります＞
             addLog("onExpired()", Color.RED);
             showButton.setEnabled(false);
         }
-    }
-
-    private class AdvListener implements AdvancedListener {
 
         @Override
-        public void onLoadStart(VAMPAd vampAd) {
+        public void onLoadStart(String adnwName) {
             // 優先順にアドネットワークごとの広告取得を開始
-            String adnwName = vampAd.getAdnwName();
-            addLog("onLoadStart(" + adnwName + ")");
+            addLog(String.format("onLoadStart(%s)", adnwName));
         }
 
         @Override
-        public void onLoadResult(VAMPAd vampAd, boolean success, String message) {
+        public void onLoadResult(String adnwName, boolean success, String message) {
             // アドネットワークを１つずつ呼び出した結果、広告在庫が取得できたかをsuccessフラグで確認
-            String adnwName = vampAd.getAdnwName();
             if (success) {
                 showButton.setEnabled(true);
-                addLog("onLoadResult(" + adnwName + ",success:" + success + ")", Color.BLACK);
+                addLog(String.format("onLoadResult(%s, Success, message:%s)", adnwName, message), Color.BLACK);
             } else {
                 // 失敗しても、次のアドネットワークがあれば、広告取得を試みます。
                 // 最終的に全てのアドネットワークの広告在庫が無ければ
                 // onFailedToLoadのNO_ADSTOCKが通知されます。
-                addLog("onLoadResult(" + adnwName + ",success:" + success + ") " + message, Color.RED);
+                addLog(String.format("onLoadResult(%s, Fail, message:%s)", adnwName, message), Color.RED);
             }
         }
     }
+
 }

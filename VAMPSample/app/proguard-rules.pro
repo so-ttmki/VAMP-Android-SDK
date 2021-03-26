@@ -1,3 +1,4 @@
+  
 # Add project specific ProGuard rules here.
 # By default, the flags in this file are appended to flags specified
 # in ${sdk.dir}/tools/proguard/proguard-android.txt
@@ -19,8 +20,6 @@
 #AdGeneration(VAMP)
 
 -keepclasseswithmembers class jp.supership.vamp.** { *; }
--keep class jp.supership.vamp.admobadapter.** { *; }
--keep class jp.supership.vamp.unityadsadapter.** { *; }
 
 #AdMob
 
@@ -48,11 +47,13 @@
 -keep class net.nend.android.** { *; }
 -dontwarn net.nend.android.**
 
+
 #Tapjoy
 
 -keep class com.tapjoy.** { *; }
 -keep class com.moat.** { *; }
 -keepattributes JavascriptInterface
+-keepattributes *Annotation*
 -keep class * extends java.util.ListResourceBundle {
 protected Object[][] getContents();
 }
@@ -69,5 +70,9 @@ public static final ** CREATOR;
 -keep class com.google.android.gms.ads.identifier.** { *; }
 -dontwarn com.tapjoy.**
 
-# FIVE
+# LINEAds
 -keep class com.five_corp.ad.** { *; }
+
+# Pangle
+-keep class com.bytedance.sdk.** { *; }
+-keep class com.pgl.sys.ces.* {*;}

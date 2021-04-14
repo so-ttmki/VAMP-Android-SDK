@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         // リリースする際は必ずコメントアウトしてください
         VAMP.setDebugMode(true);
 
+        com.google.android.gms.ads.MobileAds.initialize(this);
 
         // ターゲティング設定（AdMob、nend）
 //        VAMP.setTargeting(new VAMPTargeting()
